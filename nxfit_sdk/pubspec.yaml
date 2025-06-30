@@ -1,0 +1,48 @@
+name: nxfit_sdk
+version: 0.0.1
+homepage: https://www.neoex.io/
+repository: https://github.com/NeoEx-Developer/NxFit-SDK-for-Flutter
+description: >
+  The NxFit SDK for Flutter provides access to the NxFit REST API to retrieve user health data from the server. The SDK provides *clients*,
+  which contain convenience methods to make HTTP calls to the NxFit API. Models for all the NxFit entities are also provided. To further
+  assist in adoption of the SDK, *managers* and * repositories* are also provided that use caching. The NxFit SDK requires the consuming
+  app to provide a user ID and an access token via the [AuthProvider] interface.
+
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+  flutter: ">=3.0.0"
+
+# It may support multiple platforms, but has only been tested with the following:
+platforms:
+  android:
+  ios:
+  web:
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.1.0
+  meta: ^1.9.1
+  floor: ^1.5.0
+  time_machine: ^0.9.17
+  uuid: ^4.4.0
+  dio: ^5.8.0+1
+  retrofit: ^4.4.2
+  json_annotation: ^4.9.0
+  sqflite: ^2.4.2
+  shared_preferences: ^2.5.3
+  rxdart: ^0.28.0
+  pretty_dio_logger: ^1.4.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  retrofit_generator: ^9.0.0
+  floor_generator: ^1.5.0
+  build_runner: '>=2.3.0 <4.0.0'
+  json_serializable: ^6.8.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec

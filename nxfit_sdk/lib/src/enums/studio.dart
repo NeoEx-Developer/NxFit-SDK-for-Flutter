@@ -1,0 +1,4 @@
+enum Studio {
+  yours,
+  all
+}
