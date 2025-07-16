@@ -20,7 +20,7 @@ In your project's `pubspec.yaml` file
 # pubspec.yaml
 
 dependencies:
-  nxfit_sdk: ^0.0.1
+  nxfit_sdk: ^0.0.2
 ```
 
 ## Getting started

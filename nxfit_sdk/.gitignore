@@ -31,4 +31,6 @@ migrate_working_dir/
 .packages
 build/
 
-*.g.dart
+## We want to include the generated files because dart publish will ignore them if we have
+## include them in the .gitignore file.
+## *.g.dart
