@@ -12,7 +12,6 @@ part "get_user_session_response_dto.g.dart";
 @OffsetDateTimeJsonConverter()
 class GetUserSessionResponseDto {
   final int id;
-  final String? activityId;
   final String activityType;
   final int activeDurationInSeconds;
   final OffsetDateTime startedOnLocal;
@@ -42,7 +41,7 @@ class GetUserSessionResponseDto {
   @JsonKey(name: '_metadata')
   final Metadata metadata;
 
-  const GetUserSessionResponseDto(this.id, this.activityId, this.activityType, this.activeDurationInSeconds, this.startedOnLocal, this.endedOnLocal, this.distanceInMeters, this.energyBurnedInCalories, this.maximalOxygenConsumption, this.user, this.source, this.cadenceMetrics, this.heartRateMetrics, this.powerMetrics, this.speedMetrics,
+  const GetUserSessionResponseDto(this.id, this.activityType, this.activeDurationInSeconds, this.startedOnLocal, this.endedOnLocal, this.distanceInMeters, this.energyBurnedInCalories, this.maximalOxygenConsumption, this.user, this.source, this.cadenceMetrics, this.heartRateMetrics, this.powerMetrics, this.speedMetrics,
       this.syncDetails, this.metadata);
 
   factory GetUserSessionResponseDto.fromJson(Map<String, dynamic> json) => _$GetUserSessionResponseDtoFromJson(json);

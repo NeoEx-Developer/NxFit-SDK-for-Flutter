@@ -73,7 +73,6 @@ abstract class SessionClient {
   /// Updates a session based on it's ID. All parameters will be updated, even if they are null.
   Future<void> update(
     int id, {
-    required String activityId,
     required ActivityType activityType,
     required OffsetDateTime startedOnLocal,
     required OffsetDateTime endedOnLocal,

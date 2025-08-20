@@ -26,7 +26,6 @@ class GetUserSessionsResponseDto {
 // @OffsetDateTimeJsonConverter()
 // class Session {
 //   final int id;
-//   final String? activityId;
 //   final String activityType;
 //   final int sourceId;
 //   final String? syncDevice;
@@ -40,7 +39,6 @@ class GetUserSessionsResponseDto {
 //
 //   const Session(
 //     this.id,
-//     this.activityId,
 //     this.activityType,
 //     this.sourceId,
 //     this.syncDevice,

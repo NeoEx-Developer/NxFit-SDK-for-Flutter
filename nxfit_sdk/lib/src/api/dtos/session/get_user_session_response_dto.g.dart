@@ -10,7 +10,6 @@ GetUserSessionResponseDto _$GetUserSessionResponseDtoFromJson(
         Map<String, dynamic> json) =>
     GetUserSessionResponseDto(
       (json['id'] as num).toInt(),
-      json['activityId'] as String?,
       json['activityType'] as String,
       (json['activeDurationInSeconds'] as num).toInt(),
       const OffsetDateTimeJsonConverter()

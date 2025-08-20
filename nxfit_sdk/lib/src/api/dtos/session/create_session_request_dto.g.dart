@@ -9,7 +9,7 @@ part of 'create_session_request_dto.dart';
 CreateSessionRequestDto _$CreateSessionRequestDtoFromJson(
         Map<String, dynamic> json) =>
     CreateSessionRequestDto(
-      json['activityId'] as String?,
+      json['externalId'] as String?,
       (json['activityType'] as num).toInt(),
       (json['sourceId'] as num).toInt(),
       json['sourceAppName'] as String,
@@ -34,7 +34,7 @@ CreateSessionRequestDto _$CreateSessionRequestDtoFromJson(
 Map<String, dynamic> _$CreateSessionRequestDtoToJson(
         CreateSessionRequestDto instance) =>
     <String, dynamic>{
-      'activityId': instance.activityId,
+      'externalId': instance.externalId,
       'activityType': instance.activityType,
       'sourceId': instance.sourceId,
       'sourceAppName': instance.sourceAppName,

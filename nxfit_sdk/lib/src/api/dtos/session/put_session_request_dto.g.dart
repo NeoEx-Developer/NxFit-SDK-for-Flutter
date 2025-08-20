@@ -9,7 +9,6 @@ part of 'put_session_request_dto.dart';
 PutSessionRequestDto _$PutSessionRequestDtoFromJson(
         Map<String, dynamic> json) =>
     PutSessionRequestDto(
-      activityId: json['activityId'] as String,
       activityType: json['activityType'] as String,
       startedOnLocal: const OffsetDateTimeJsonConverter()
           .fromJson(json['startedOnLocal'] as String),
@@ -26,7 +25,6 @@ PutSessionRequestDto _$PutSessionRequestDtoFromJson(
 Map<String, dynamic> _$PutSessionRequestDtoToJson(
         PutSessionRequestDto instance) =>
     <String, dynamic>{
-      'activityId': instance.activityId,
       'activityType': instance.activityType,
       'startedOnLocal':
           const OffsetDateTimeJsonConverter().toJson(instance.startedOnLocal),

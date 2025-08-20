@@ -6,7 +6,6 @@ import 'session_model.dart';
 
 @immutable
 class UserSessionModel extends SessionModel {
-  final String? activityId;
   final String sourceIntegration;
   final String? sourceDevice;
   final String? sourceApp;
@@ -17,7 +16,6 @@ class UserSessionModel extends SessionModel {
 
   const UserSessionModel(
     super.id, {
-    required this.activityId,
     required super.activityType,
     required super.activeDuration,
     required this.sourceIntegration,

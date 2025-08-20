@@ -11,7 +11,6 @@ part 'put_session_request_dto.g.dart';
 @JsonSerializable(createToJson: true)
 @OffsetDateTimeJsonConverter()
 class PutSessionRequestDto {
-  final String activityId;
   final String activityType;
   final OffsetDateTime startedOnLocal;
   final OffsetDateTime endedOnLocal;
@@ -22,7 +21,6 @@ class PutSessionRequestDto {
   final String privacy;
 
   const PutSessionRequestDto({
-    required this.activityId,
     required this.activityType,
     required this.startedOnLocal,
     required this.endedOnLocal,

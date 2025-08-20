@@ -11,7 +11,7 @@ part 'create_session_request_dto.g.dart';
 @JsonSerializable(createToJson: true)
 @OffsetDateTimeJsonConverter()
 class CreateSessionRequestDto {
-  final String? activityId;
+  final String? externalId;
   final int activityType;
   final int sourceId;
   final String sourceAppName;
@@ -31,7 +31,7 @@ class CreateSessionRequestDto {
   final String? syncVersion;
 
   const CreateSessionRequestDto(
-    this.activityId,
+    this.externalId,
     this.activityType,
     this.sourceId,
     this.sourceAppName,

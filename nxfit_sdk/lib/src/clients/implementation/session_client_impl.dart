@@ -98,7 +98,6 @@ class SessionClientImpl extends SessionClient with ApiCaller {
   @override
   Future<void> update(
     int id, {
-    required String activityId,
     required ActivityType activityType,
     required OffsetDateTime startedOnLocal,
     required OffsetDateTime endedOnLocal,
@@ -113,7 +112,6 @@ class SessionClientImpl extends SessionClient with ApiCaller {
           _userId,
           id,
           PutSessionRequestDto(
-            activityId: activityId,
             activityType: activityType.value,
             startedOnLocal: startedOnLocal,
             endedOnLocal: endedOnLocal,
@@ -131,7 +129,6 @@ class SessionClientImpl extends SessionClient with ApiCaller {
 extension GetUserSessionResponseDtoExtensions on GetUserSessionResponse.GetUserSessionResponseDto {
   UserSessionModel _asModel() {
     return UserSessionModel(id,
-        activityId: activityId,
         activityType: ActivityType.of(activityType),
         activeDuration: Duration(seconds: activeDurationInSeconds),
         energyBurnedInCalories: energyBurnedInCalories,
