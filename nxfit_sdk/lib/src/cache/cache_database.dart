@@ -1,7 +1,7 @@
 // First three imports are required for the floor code generated code to work
 import 'dart:async';
 
-import 'package:floor/floor.dart';
+import 'package:froom/froom.dart';
 import 'package:sqflite/sqflite.dart' as sqflite;
 
 import 'converters/date_time_converter.dart';
@@ -23,14 +23,14 @@ const _entities = [
 
 @Database(version: _schemaVersion, entities: _entities)
 @TypeConverters([DateTimeConverter, OptionalDateTimeConverter])
-abstract class CacheDatabase extends FloorDatabase {
+abstract class CacheDatabase extends FroomDatabase {
   CachedQueryDao get cachedQueries;
 
   IntegrationDao get integrations;
   SourceDao get sources;
 
   static Future<CacheDatabase> build() async {
-    return await $FloorCacheDatabase.databaseBuilder(_databaseName).build();
+    return await $FroomCacheDatabase.databaseBuilder(_databaseName).build();
   }
 
   static const String _databaseName = "com.neoex.nxfit.cache.db";

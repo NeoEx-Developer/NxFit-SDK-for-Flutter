@@ -51,7 +51,10 @@ abstract class IntegrationsManager {
   /// [IntegrationIdentifier].
   Stream<DisconnectionEvent> get disconnectionEvents;
 
-  /// Generates a URL to be used to launch an Intent which puts the user through the integration authorize
+  /// Connects the NXFit user to the specified integration. This method supports two basic flows: those that require user
+  /// authorization and those that do not.
+  ///
+  /// Generates a URL to be used to be launched which puts the user through the integration authorize
   /// process. Part of the URL includes a redirect URL which is used to send the result of the authorize
   /// process back to your app. The redirect url contains the application package ID of the app initiating
   /// the authorize process. This is done to ensure that the application initiating the authorize process
@@ -68,7 +71,7 @@ abstract class IntegrationsManager {
   ///           ....
   ///           defaultConfig {
   ///               applicationId "com.example.app"  // <-- this is the application package ID
-  ///               minSdk 26
+  ///               minSdk 24
   ///               targetSdk 33
   ///               versionCode 1
   ///               versionName "1.0"
@@ -98,18 +101,13 @@ abstract class IntegrationsManager {
   /// ### Initiate authorize process
   ///
   /// To start the integration authorize process an Intent must be used to browse to the authorize page. The URI for
-  /// the Intent is provided by [IntegrationsManager.getAuthorizeUri], along with necessary redirect URI that includes the
+  /// the Intent is provided by [IntegrationsManager.connect], along with necessary redirect URI that includes the
   /// application package ID. With the integration authorize URI in hand, use the **CustomTabsIntent** to navigate
   /// to the provided URL. Example:
   ///
-  ///     val authorizeUri = integrationsManager.getAuthorizeUri("garmin")
-  ///     val builder = CustomTabsIntent.Builder()
-  ///
-  ///     builder
-  ///       .setShowTitle(true)
-  ///       .setShareState(SHARE_STATE_OFF)
-  ///       .build()
-  ///       .launchUrl(context, authorizeUri)
+  ///     await _integrationsManager.connect(integrationIdentifier, (authUri) async {
+  ///       launchUrl(authUri);
+  ///     });
   ///
   /// ### Handle response
   ///
@@ -127,7 +125,7 @@ abstract class IntegrationsManager {
   ///          integrationsManager.handleAuthorizeResponse(data.toString())
   ///        }
   ///     }
-  Future<Uri?> getAuthorizeUri(String integrationIdentifier);
+  Future<void> connect(String integrationIdentifier, Future<void> Function(Uri) authorizeAction);
 
   /// Will decode the URI and will emit a [ConnectionEvent] with the [IntegrationConnectionCode] for the integration.
   /// The emitted [IntegrationConnectionCode] is also returned to the caller.

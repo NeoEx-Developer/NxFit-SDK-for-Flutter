@@ -1,3 +1,4 @@
+import '../models/integration_connection_model.dart';
 import '../models/integration_model.dart';
 import '../persistence/cacheable_resource.dart';
 
@@ -29,7 +30,7 @@ abstract class IntegrationClient {
   /// URL which is used to send the result of the authorize process back to your app. The redirect url contains the application
   /// package ID of the app initiating the authorize process. This is done to ensure that the application initiating the authorize
   /// process receives the result from the browser. An IntentFilter is required to make this work.
-  Future<String?> getAuthorizeUri(String identifier, String redirectUri);
+  Future<IntegrationConnectedModel> connect(String identifier, String redirectUri);
 
   /// Disconnects the integration with the given [identifier]. The current user will no longer have fitness data sent to the NxFit service.
   Future<void> disconnect(String identifier);

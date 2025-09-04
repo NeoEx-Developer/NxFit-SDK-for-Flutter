@@ -3,9 +3,11 @@ import 'package:meta/meta.dart';
 import '../../api/api_caller.dart';
 import '../../api/dtos/integration/get_user_integration_response_dto.dart';
 import '../../api/dtos/integration/get_user_integrations_response_dto.dart';
+import '../../api/dtos/integration/put_user_integration_response_dto.dart';
 import '../../api/extensions/http_response_extensions.dart';
 import '../../api/helpers/quoted_string.dart';
 import '../../api/protocols/integration_protocol.dart';
+import '../../models/integration_connection_model.dart';
 import '../../models/integration_model.dart';
 import '../../persistence/cacheable_resource.dart';
 import '../integration_client.dart';
@@ -34,11 +36,14 @@ class IntegrationClientImpl extends IntegrationClient with ApiCaller {
     return response.asCacheableResource((dto) => dto.asModel());
   }
 
-  @override
-  Future<String?> getAuthorizeUri(String identifier, String redirectUri) async {
-    final response = await apiCall(() async => _protocol.connectUserIntegration(identifier, redirectUri));
 
-    return response.data.authorizeUrl;
+  @override
+  Future<IntegrationConnectedModel> connect(String identifier, String redirectUri) async {
+    final response = await apiCall(() async {
+      return await _protocol.connectUserIntegration(identifier, redirectUri);
+    });
+
+    return response.data.asModel();
   }
 
   @override
@@ -47,6 +52,8 @@ class IntegrationClientImpl extends IntegrationClient with ApiCaller {
       return _protocol.disconnectUserIntegration(identifier);
     });
   }
+
+
 }
 
 @internal
@@ -77,6 +84,15 @@ extension on GetUserIntegrationResponseDto {
       isConnected: isConnected,
       isEnabled: isEnabled,
       lastModifiedOn: updatedOn,
+    );
+  }
+}
+
+@internal
+extension on PutUserIntegrationResponseDto {
+  IntegrationConnectedModel asModel() {
+    return IntegrationConnectedModel(
+        authorizeUrl: authorizeUrl
     );
   }
 }

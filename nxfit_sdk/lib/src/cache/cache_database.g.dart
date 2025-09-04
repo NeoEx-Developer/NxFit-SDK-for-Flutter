@@ -3,7 +3,7 @@
 part of 'cache_database.dart';
 
 // **************************************************************************
-// FloorGenerator
+// FroomGenerator
 // **************************************************************************
 
 abstract class $CacheDatabaseBuilderContract {
@@ -18,7 +18,7 @@ abstract class $CacheDatabaseBuilderContract {
 }
 
 // ignore: avoid_classes_with_only_static_members
-class $FloorCacheDatabase {
+class $FroomCacheDatabase {
   /// Creates a database builder for a persistent database.
   /// Once a database is built, you should keep a reference to it and re-use it.
   static $CacheDatabaseBuilderContract databaseBuilder(String name) =>

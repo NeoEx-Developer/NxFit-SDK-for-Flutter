@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../auth/auth_provider.dart';
@@ -62,11 +61,19 @@ class IntegrationsManagerImpl implements IntegrationsManager {
   Stream<List<IntegrationModel>> get integrations => _integrations.stream;
 
   @override
-  Future<Uri?> getAuthorizeUri(String integrationIdentifier) async {
-    final redirectUriString = await _integrationClient.getAuthorizeUri(integrationIdentifier, "${baseRedirectUri}main/profile");
+  Future<void> connect(String integrationIdentifier, Future<void> Function(Uri) authorizeAction) async {
+    //final redirectUrl = "${baseRedirectUri}main/profile";
+    final redirectUrl = "${baseRedirectUri}nxfit/integrations";
+    final integrationConnected = await _integrationClient.connect(integrationIdentifier, redirectUrl);
+    final authorizeUrl = integrationConnected.authorizeUrl;
 
-    return redirectUriString != null ? Uri.parse(redirectUriString) : null;
+    if (authorizeUrl?.isNotEmpty ?? false) {
+      final Uri authorizeUri = Uri.parse(authorizeUrl!);
+
+      await authorizeAction(authorizeUri);
+    }
   }
+
 
   @override
   Future<IntegrationConnectionCode> handleAuthorizeResponseFromUrl(Uri response) async {

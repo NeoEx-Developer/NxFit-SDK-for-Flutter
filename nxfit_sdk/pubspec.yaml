@@ -1,5 +1,5 @@
 name: nxfit_sdk
-version: 0.0.3
+version: 0.0.4
 homepage: https://www.neoex.io/
 repository: https://github.com/NeoEx-Developer/NxFit-SDK-for-Flutter
 description: >
@@ -23,11 +23,11 @@ dependencies:
     sdk: flutter
   http: ^1.1.0
   meta: ^1.9.1
-  floor: ^1.5.0
+  froom: ^3.0.2
   time_machine: ^0.9.17
   uuid: ^4.4.0
   dio: ^5.8.0+1
-  retrofit: ^4.4.2
+  retrofit: ^4.7.2
   json_annotation: ^4.9.0
   sqflite: ^2.4.2
   shared_preferences: ^2.5.3
@@ -39,8 +39,8 @@ dev_dependencies:
     sdk: flutter
 
   flutter_lints: ^2.0.0
-  retrofit_generator: ^9.0.0
-  floor_generator: ^1.5.0
+  retrofit_generator: ^10.0.4
+  froom_generator: ^3.0.2
   build_runner: '>=2.3.0 <4.0.0'
   json_serializable: ^6.8.0
 

@@ -2,18 +2,16 @@
 
 part of 'session_summary_protocol.dart';
 
+// dart format off
+
 // **************************************************************************
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
 
 class _SessionSummaryProtocol implements SessionSummaryProtocol {
-  _SessionSummaryProtocol(
-    this._dio, {
-    this.baseUrl,
-    this.errorLogger,
-  });
+  _SessionSummaryProtocol(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -37,23 +35,16 @@ class _SessionSummaryProtocol implements SessionSummaryProtocol {
     final _headers = <String, dynamic>{r'if-none-match': eTag};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<HttpResponse<GetSessionMetricsResponseDto>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/users/${userId}/sessions/metrics',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            )));
+    final _options = _setStreamType<HttpResponse<GetSessionMetricsResponseDto>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/users/${userId}/sessions/metrics',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late GetSessionMetricsResponseDto _value;
     try {
@@ -84,22 +75,17 @@ class _SessionSummaryProtocol implements SessionSummaryProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<GetHeartRateZoneSummariesResponseDto>>(
-            Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-                .compose(
-                  _dio.options,
-                  '/users/${userId}/sessions/heartrate-zones',
-                  queryParameters: queryParameters,
-                  data: _data,
-                )
-                .copyWith(
-                    baseUrl: _combineBaseUrls(
-                  _dio.options.baseUrl,
-                  baseUrl,
-                )));
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/users/${userId}/sessions/heartrate-zones',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late GetHeartRateZoneSummariesResponseDto _value;
     try {
@@ -125,10 +111,7 @@ class _SessionSummaryProtocol implements SessionSummaryProtocol {
     return requestOptions;
   }
 
-  String _combineBaseUrls(
-    String dioBaseUrl,
-    String? baseUrl,
-  ) {
+  String _combineBaseUrls(String dioBaseUrl, String? baseUrl) {
     if (baseUrl == null || baseUrl.trim().isEmpty) {
       return dioBaseUrl;
     }
@@ -142,3 +125,5 @@ class _SessionSummaryProtocol implements SessionSummaryProtocol {
     return Uri.parse(dioBaseUrl).resolveUri(url).toString();
   }
 }
+
+// dart format on
