@@ -43,7 +43,7 @@ class IntegrationClientImpl extends IntegrationClient with ApiCaller {
       return await _protocol.connectUserIntegration(identifier, redirectUri);
     });
 
-    return response.data.asModel();
+    return response.data?.asModel() ?? const IntegrationConnectedModel();
   }
 
   @override
