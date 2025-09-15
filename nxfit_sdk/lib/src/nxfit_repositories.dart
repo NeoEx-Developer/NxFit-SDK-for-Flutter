@@ -3,7 +3,6 @@ import 'cache/cache_database.dart';
 import 'cache/persistent_cached_resource.dart';
 import 'nxfit.dart';
 import 'repositories/implementation/badge_repository_impl.dart';
-import 'repositories/implementation/integration_repository_impl.dart';
 import 'repositories/implementation/profile_repository_impl.dart';
 import 'repositories/implementation/session_repository_impl.dart';
 import 'repositories/implementation/session_sample_repository_impl.dart';
@@ -22,7 +21,6 @@ part "nxfit_repositories_impl.dart";
 abstract class NxFitRepositories {
   NxFit get nxfit;
   BadgeRepository get badgeRepo;
-  IntegrationRepository get integrationRepo;
   ProfileRepository get profileRepo;
   SessionRepository get sessionRepo;
   SessionSampleRepository get sessionSampleRepo;
@@ -39,7 +37,6 @@ abstract class NxFitRepositories {
     return _NxFitRepositoriesImpl(
       nxfit,
       badgeRepo: BadgeRepositoryImpl(persistentCachedResource, nxfit.badgeClient),
-      integrationRepo: IntegrationRepositoryImpl(persistentCachedResource, nxfit.integrationClient),
       profileRepo: ProfileRepositoryImpl(persistentCachedResource, nxfit.profileClient),
       sessionRepo: SessionRepositoryImpl(persistentCachedResource, nxfit.sessionClient),
       sessionSampleRepo: SessionSampleRepositoryImpl(persistentCachedResource, nxfit.sessionSampleClient),

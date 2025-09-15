@@ -1,3 +1,5 @@
+import 'package:nxfit_sdk/src/clients/local_integration_client.dart';
+
 import 'cache/cache_database.dart';
 import 'managers/implementation/integrations_manager_impl.dart';
 import 'managers/integrations_manager.dart';
@@ -26,12 +28,13 @@ abstract class NxFitManagers {
   static Future<NxFitManagers> build(
     final NxFit nxfit, {
     required String baseRedirectUri,
+    LocalIntegrationClient? localSyncClient
   }) async {
     final db = await CacheDatabase.build();
 
     return _NxFitManagersImpl(
       nxfit,
-      integrationsManager: await IntegrationsManagerImpl.build(baseRedirectUri, nxfit.authProvider, nxfit.integrationClient, database: db),
+      integrationsManager: await IntegrationsManagerImpl.build(baseRedirectUri, nxfit.authProvider, nxfit.integrationClient, database: db, localIntegrationClient: localSyncClient),
     );
   }
 }

@@ -8,9 +8,6 @@ class _NxFitRepositoriesImpl implements NxFitRepositories {
   final BadgeRepository badgeRepo;
 
   @override
-  final IntegrationRepository integrationRepo;
-
-  @override
   final ProfileRepository profileRepo;
 
   @override
@@ -27,7 +24,6 @@ class _NxFitRepositoriesImpl implements NxFitRepositories {
 
   _NxFitRepositoriesImpl(this.nxfit, {
     required this.badgeRepo,
-    required this.integrationRepo,
     required this.profileRepo,
     required this.sessionRepo,
     required this.sessionSampleRepo,

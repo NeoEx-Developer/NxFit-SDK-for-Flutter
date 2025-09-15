@@ -13,14 +13,8 @@ class IntegrationEntity implements CacheableEntity {
   @ColumnInfo(name: "logo_url")
   final String logoUrl;
 
-  @ColumnInfo(name: "is_local")
-  final bool isLocal;
-
   @ColumnInfo(name: "is_connected")
   final bool isConnected;
-
-  @ColumnInfo(name: "is_enabled")
-  final bool isEnabled;
 
   @override
   @ColumnInfo(name: "last_modified_on")
@@ -34,9 +28,7 @@ class IntegrationEntity implements CacheableEntity {
     required this.identifier,
     required this.displayName,
     required this.logoUrl,
-    required this.isLocal,
     required this.isConnected,
-    required this.isEnabled,
     this.lastModifiedOn,
     this.eTag,
   });

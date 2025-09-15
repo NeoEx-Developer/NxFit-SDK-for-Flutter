@@ -84,7 +84,7 @@ class _$CacheDatabase extends CacheDatabase {
     Callback? callback,
   ]) async {
     final databaseOptions = sqflite.OpenDatabaseOptions(
-      version: 1,
+      version: 2,
       onConfigure: (database) async {
         await database.execute('PRAGMA foreign_keys = ON');
         await callback?.onConfigure?.call(database);
@@ -102,7 +102,7 @@ class _$CacheDatabase extends CacheDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `cached_query` (`key` TEXT NOT NULL, `lastModifiedOn` INTEGER, `eTag` TEXT, PRIMARY KEY (`key`))');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `integration` (`identifier` TEXT NOT NULL, `display_name` TEXT NOT NULL, `logo_url` TEXT NOT NULL, `is_local` INTEGER NOT NULL, `is_connected` INTEGER NOT NULL, `is_enabled` INTEGER NOT NULL, `last_modified_on` INTEGER, `etag` TEXT, PRIMARY KEY (`identifier`))');
+            'CREATE TABLE IF NOT EXISTS `integration` (`identifier` TEXT NOT NULL, `display_name` TEXT NOT NULL, `logo_url` TEXT NOT NULL, `is_connected` INTEGER NOT NULL, `last_modified_on` INTEGER, `etag` TEXT, PRIMARY KEY (`identifier`))');
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `source` (`id` INTEGER NOT NULL, `integration_identifier` TEXT NOT NULL, `integration_display_name` TEXT, `device_name` TEXT, `device_hardware_version` TEXT, `device_manufacturer` TEXT, `device_os` TEXT, `app_name` TEXT, `app_identifier` TEXT, `priority` INTEGER NOT NULL, `is_included` INTEGER NOT NULL, `created_on` INTEGER NOT NULL, `updated_on` INTEGER, `last_modified_on` INTEGER, `etag` TEXT, PRIMARY KEY (`id`))');
 
@@ -199,9 +199,7 @@ class _$IntegrationDao extends IntegrationDao {
                   'identifier': item.identifier,
                   'display_name': item.displayName,
                   'logo_url': item.logoUrl,
-                  'is_local': item.isLocal ? 1 : 0,
                   'is_connected': item.isConnected ? 1 : 0,
-                  'is_enabled': item.isEnabled ? 1 : 0,
                   'last_modified_on':
                       _optionalDateTimeConverter.encode(item.lastModifiedOn),
                   'etag': item.eTag
@@ -223,9 +221,7 @@ class _$IntegrationDao extends IntegrationDao {
             identifier: row['identifier'] as String,
             displayName: row['display_name'] as String,
             logoUrl: row['logo_url'] as String,
-            isLocal: (row['is_local'] as int) != 0,
             isConnected: (row['is_connected'] as int) != 0,
-            isEnabled: (row['is_enabled'] as int) != 0,
             lastModifiedOn: _optionalDateTimeConverter
                 .decode(row['last_modified_on'] as int?),
             eTag: row['etag'] as String?),
@@ -240,9 +236,7 @@ class _$IntegrationDao extends IntegrationDao {
             identifier: row['identifier'] as String,
             displayName: row['display_name'] as String,
             logoUrl: row['logo_url'] as String,
-            isLocal: (row['is_local'] as int) != 0,
             isConnected: (row['is_connected'] as int) != 0,
-            isEnabled: (row['is_enabled'] as int) != 0,
             lastModifiedOn: _optionalDateTimeConverter
                 .decode(row['last_modified_on'] as int?),
             eTag: row['etag'] as String?));
@@ -256,9 +250,7 @@ class _$IntegrationDao extends IntegrationDao {
             identifier: row['identifier'] as String,
             displayName: row['display_name'] as String,
             logoUrl: row['logo_url'] as String,
-            isLocal: (row['is_local'] as int) != 0,
             isConnected: (row['is_connected'] as int) != 0,
-            isEnabled: (row['is_enabled'] as int) != 0,
             lastModifiedOn: _optionalDateTimeConverter
                 .decode(row['last_modified_on'] as int?),
             eTag: row['etag'] as String?),

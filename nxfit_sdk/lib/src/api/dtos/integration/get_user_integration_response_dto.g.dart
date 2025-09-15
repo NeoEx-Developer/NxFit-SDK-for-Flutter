@@ -12,9 +12,7 @@ GetUserIntegrationResponseDto _$GetUserIntegrationResponseDtoFromJson(
       identifier: json['identifier'] as String,
       displayName: json['displayName'] as String,
       logoUrl: json['logoUrl'] as String,
-      isLocal: json['isLocal'] as bool,
       isConnected: json['isConnected'] as bool,
-      isEnabled: json['isEnabled'] as bool,
       updatedOn: const OffsetDateTimeJsonConverter()
           .fromJson(json['updatedOn'] as String),
     );

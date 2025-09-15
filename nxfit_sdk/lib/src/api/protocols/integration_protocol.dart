@@ -30,7 +30,7 @@ abstract class IntegrationProtocol {
   });
 
   @PUT("user/integrations/{integration}")
-  Future<HttpResponse<PutUserIntegrationResponseDto?>> connectUserIntegration(@Path("integration") String integration, @Query("redirectUri") String redirectUri);
+  Future<HttpResponse<PutUserIntegrationResponseDto>> connectUserIntegration(@Path("integration") String integration, @Query("redirectUri") String redirectUri);
 
   @DELETE("user/integrations/{integration}")
   Future disconnectUserIntegration(@Path("integration") String integration);

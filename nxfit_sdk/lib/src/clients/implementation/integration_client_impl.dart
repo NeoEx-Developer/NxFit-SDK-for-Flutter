@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:nxfit_sdk/models.dart';
 
 import '../../api/api_caller.dart';
 import '../../api/dtos/integration/get_user_integration_response_dto.dart';
@@ -43,7 +44,7 @@ class IntegrationClientImpl extends IntegrationClient with ApiCaller {
       return await _protocol.connectUserIntegration(identifier, redirectUri);
     });
 
-    return response.data?.asModel() ?? const IntegrationConnectedModel();
+    return response.data.asModel();
   }
 
   @override
@@ -52,8 +53,6 @@ class IntegrationClientImpl extends IntegrationClient with ApiCaller {
       return _protocol.disconnectUserIntegration(identifier);
     });
   }
-
-
 }
 
 @internal
@@ -64,9 +63,8 @@ extension GetUserIntegrationsResponseDtoExtensions on GetUserIntegrationsRespons
               identifier: integration.identifier,
               displayName: integration.displayName,
               logoUrl: integration.logoUrl,
-              isLocal: integration.isLocal,
               isConnected: integration.isConnected,
-              isEnabled: integration.isEnabled,
+              availability: IntegrationAvailability.available,
               lastModifiedOn: integration.updatedOn,
             ))
         .toList();
@@ -80,10 +78,9 @@ extension on GetUserIntegrationResponseDto {
       identifier: identifier,
       displayName: displayName,
       logoUrl: logoUrl,
-      isLocal: isLocal,
       isConnected: isConnected,
-      isEnabled: isEnabled,
-      lastModifiedOn: updatedOn,
+      availability: IntegrationAvailability.available,
+      lastModifiedOn: updatedOn
     );
   }
 }

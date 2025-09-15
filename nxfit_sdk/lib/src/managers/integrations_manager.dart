@@ -139,6 +139,6 @@ abstract class IntegrationsManager {
   /// May cause an emission on the [disconnectionEvents] Stream.
   Future<void> disconnect(String integrationIdentifier);
 
-  /// Will sync the user's integrations with the NxFit service. Any new integrations will be emitted by the [integrations] stream.
-  Future<void> sync();
+  /// Will sync the user's integrations with the NxFit service. Any new or updated integrations will be emitted by the [integrations] stream.
+  Future<void> refreshIntegrations();
 }

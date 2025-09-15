@@ -101,7 +101,7 @@ class _IntegrationProtocol implements IntegrationProtocol {
   }
 
   @override
-  Future<HttpResponse<PutUserIntegrationResponseDto?>> connectUserIntegration(
+  Future<HttpResponse<PutUserIntegrationResponseDto>> connectUserIntegration(
     String integration,
     String redirectUri,
   ) async {
@@ -110,7 +110,7 @@ class _IntegrationProtocol implements IntegrationProtocol {
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _options =
-        _setStreamType<HttpResponse<PutUserIntegrationResponseDto?>>(
+        _setStreamType<HttpResponse<PutUserIntegrationResponseDto>>(
       Options(method: 'PUT', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
@@ -122,12 +122,10 @@ class _IntegrationProtocol implements IntegrationProtocol {
             baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
           ),
     );
-    final _result = await _dio.fetch<Map<String, dynamic>?>(_options);
-    late PutUserIntegrationResponseDto? _value;
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late PutUserIntegrationResponseDto _value;
     try {
-      _value = _result.data == null
-          ? null
-          : PutUserIntegrationResponseDto.fromJson(_result.data!);
+      _value = PutUserIntegrationResponseDto.fromJson(_result.data!);
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
       rethrow;
