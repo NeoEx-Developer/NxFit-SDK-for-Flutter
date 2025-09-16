@@ -26,6 +26,7 @@ class IntegrationsManagerImpl implements IntegrationsManager {
   final _disconnectionEvents = StreamController<DisconnectionEvent>();
   final _integrations = BehaviorSubject<List<IntegrationModel>>();
   final _localIntegrations = BehaviorSubject<List<IntegrationModel>>();
+  final _localIntegrationClientReady = BehaviorSubject<LocalIntegrationClientState>.seeded(LocalIntegrationClientState.notReady);
   static const cacheKey = "integrations";
   static const List<IntegrationModel> _allLocalIntegrations = [
     IntegrationModel(identifier: "apple", displayName: "Apple Health", logoUrl: "https://stnxfitcancshared.blob.core.windows.net/public/integrations/apple_health.png", isConnected: false, availability: IntegrationAvailability.unsupported, lastModifiedOn: null),
@@ -38,12 +39,37 @@ class IntegrationsManagerImpl implements IntegrationsManager {
     final _database = database ?? await CacheDatabase.build();
     final manager = IntegrationsManagerImpl._(baseRedirectUri, _database, client, localIntegrationClient);
 
-    Rx.combineLatest2(_database.integrations.streamIntegrations(), manager._localIntegrations, (integrations, localIntegrations) => [...integrations.map((entity) => entity.toModel()).toList(), ...localIntegrations]).listen((integrations) => manager._integrations.value = integrations);
+    Rx.combineLatest2(
+        _database.integrations.streamIntegrations(),
+        manager._localIntegrations,
+            (integrations, localIntegrations) => [
+              ...integrations.map((entity) => entity.toModel()).toList(),
+              ...localIntegrations
+            ]
+    )
+    .listen((integrations) {
+      integrations.sort((a, b) => a.displayName.compareTo(b.displayName));
+
+      manager._integrations.value = integrations;
+    });
 
     authProvider.authState.listen((authState) async {
       if (authState.isAuthenticated) {
-        await manager.refreshIntegrations();
+        await manager._refreshRemoteIntegrations();
       }
+    });
+
+    Rx.combineLatest2(authProvider.authState, manager._localIntegrationClientReady, (authState, localIntegrationClientState) => (authState, localIntegrationClientState))
+      .listen((data) async {
+        final (authState, localIntegrationClientState) = data;
+
+        if (authState.isAuthenticated && localIntegrationClientState.isReady) {
+          await manager._refreshLocalIntegrations();
+        }
+    });
+
+    localIntegrationClient?.readyState.listen((state) {
+      manager._localIntegrationClientReady.value = state;
     });
 
     return manager;
@@ -121,7 +147,7 @@ class IntegrationsManagerImpl implements IntegrationsManager {
   Future<void> _refreshLocalIntegrations() async {
     List<IntegrationModel> integrations = [];
 
-    if (_localIntegrationClient != null) {
+    if (_isLocalIntegrationClientReady) {
       final localIntegrations = await _localIntegrationClient!.getIntegrations();
 
       for (final localIntegration in localIntegrations) {
@@ -182,11 +208,16 @@ class IntegrationsManagerImpl implements IntegrationsManager {
     }
   }
 
+  bool get _isLocalIntegrationClientReady => _localIntegrationClientReady.value.isReady;
   IntegrationModel? _getLocalIntegration(String integrationIdentifier) => _localIntegrations.value.where((integration) => integration.identifier == integrationIdentifier).firstOrNull;
 
   void _publishLocalIntegrationUpdate(IntegrationModel updatedIntegration) {
     _localIntegrations.value = [..._localIntegrations.value.where((integration) => integration.identifier != updatedIntegration.identifier).toList(), updatedIntegration];
   }
+}
+
+extension on LocalIntegrationClientState {
+  bool get isReady => this == LocalIntegrationClientState.ready;
 }
 
 extension on IntegrationEntity {
