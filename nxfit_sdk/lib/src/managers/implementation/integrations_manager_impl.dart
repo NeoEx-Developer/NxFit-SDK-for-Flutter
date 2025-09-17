@@ -11,10 +11,8 @@ import '../../auth/auth_state.dart';
 import '../../cache/cache_database.dart';
 import '../../cache/entities/cached_query_entity.dart';
 import '../../cache/entities/integration_entity.dart';
-import '../../clients/integration_client.dart';
 import '../../exceptions/not_modified_exception.dart';
 import '../../managers/integrations_manager.dart';
-import '../../models/integration_model.dart';
 
 @internal
 class IntegrationsManagerImpl implements IntegrationsManager {
@@ -26,7 +24,7 @@ class IntegrationsManagerImpl implements IntegrationsManager {
   final _disconnectionEvents = StreamController<DisconnectionEvent>();
   final _integrations = BehaviorSubject<List<IntegrationModel>>();
   final _localIntegrations = BehaviorSubject<List<IntegrationModel>>();
-  final _localIntegrationClientReady = BehaviorSubject<LocalIntegrationClientState>.seeded(LocalIntegrationClientState.notReady);
+  final _localIntegrationClientReady = BehaviorSubject<bool>.seeded(false);
   static const cacheKey = "integrations";
   static const List<IntegrationModel> _allLocalIntegrations = [
     IntegrationModel(identifier: "apple", displayName: "Apple Health", logoUrl: "https://stnxfitcancshared.blob.core.windows.net/public/integrations/apple_health.png", isConnected: false, availability: IntegrationAvailability.unsupported, lastModifiedOn: null),
@@ -59,16 +57,16 @@ class IntegrationsManagerImpl implements IntegrationsManager {
       }
     });
 
-    Rx.combineLatest2(authProvider.authState, manager._localIntegrationClientReady, (authState, localIntegrationClientState) => (authState, localIntegrationClientState))
+    Rx.combineLatest2(authProvider.authState, manager._localIntegrationClientReady, (authState, localIntegrationClientReady) => (authState, localIntegrationClientReady))
       .listen((data) async {
-        final (authState, localIntegrationClientState) = data;
+        final (authState, localIntegrationClientReady) = data;
 
-        if (authState.isAuthenticated && localIntegrationClientState.isReady) {
+        if (authState.isAuthenticated && localIntegrationClientReady) {
           await manager._refreshLocalIntegrations();
         }
     });
 
-    localIntegrationClient?.readyState.listen((state) {
+    localIntegrationClient?.isReady.listen((state) {
       manager._localIntegrationClientReady.value = state;
     });
 
@@ -208,16 +206,12 @@ class IntegrationsManagerImpl implements IntegrationsManager {
     }
   }
 
-  bool get _isLocalIntegrationClientReady => _localIntegrationClientReady.value.isReady;
+  bool get _isLocalIntegrationClientReady => _localIntegrationClientReady.value;
   IntegrationModel? _getLocalIntegration(String integrationIdentifier) => _localIntegrations.value.where((integration) => integration.identifier == integrationIdentifier).firstOrNull;
 
   void _publishLocalIntegrationUpdate(IntegrationModel updatedIntegration) {
     _localIntegrations.value = [..._localIntegrations.value.where((integration) => integration.identifier != updatedIntegration.identifier).toList(), updatedIntegration];
   }
-}
-
-extension on LocalIntegrationClientState {
-  bool get isReady => this == LocalIntegrationClientState.ready;
 }
 
 extension on IntegrationEntity {
