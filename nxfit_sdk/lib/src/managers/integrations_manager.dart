@@ -127,6 +127,10 @@ abstract class IntegrationsManager {
   ///     }
   Future<void> connect(String integrationIdentifier, Future<void> Function(Uri) authorizeAction);
 
+  /// Determines if the given URL can be handled by this manager.
+  /// Typically this is used to check whether a deep linked URL can be handled such as the redirected URL from an integration connect action.
+  bool canHandleAuthorizeResponseFromUrl(Uri response);
+
   /// Will decode the URI and will emit a [ConnectionEvent] with the [IntegrationConnectionCode] for the integration.
   /// The emitted [IntegrationConnectionCode] is also returned to the caller.
   Future<IntegrationConnectionCode> handleAuthorizeResponseFromUrl(Uri response);

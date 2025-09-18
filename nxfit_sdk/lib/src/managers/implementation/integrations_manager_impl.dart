@@ -105,6 +105,11 @@ class IntegrationsManagerImpl implements IntegrationsManager {
   }
 
   @override
+  bool canHandleAuthorizeResponseFromUrl(Uri response) {
+    return response.host == 'nxfit' && response.path.startsWith('/integrations');
+  }
+
+  @override
   Future<IntegrationConnectionCode> handleAuthorizeResponseFromUrl(Uri response) async {
     final integration = response.queryParameters["integration"] ?? "N/A";
     final connectionResult = response.queryParameters["connection"] ?? IntegrationConnectionCode.failure.name;
