@@ -1,32 +1,26 @@
-
 import '../../core.dart';
+import '../logging/nxfit_logger.dart';
 
+/// A paged list of items returned from the NXFit API.
+/// The [items] property contains the list of items returned in the current page.
+/// The [next] and [previous] properties contain the pagination requests for the next and previous pages respectively.
+/// If there is no next or previous page, the corresponding property will be null.
 class PagedList<E> {
   final List<E> items;
   final PaginationRequest? next;
   final PaginationRequest? previous;
 
-  const PagedList(
-    this.items, {
-    this.next,
-    this.previous,
-  });
+  const PagedList(this.items, {this.next, this.previous});
 
-  PagedList.withLinks(this.items, Map<String, String> links)
-      : next = _buildRequestFromLinks(_next, _after, links, PaginationRequest.next),
-        previous = _buildRequestFromLinks(_prev, _before, links, PaginationRequest.previous);
+  PagedList.withLinks(this.items, Map<String, String> links) : next = _buildRequestFromLinks(_next, _after, links, PaginationRequest.next), previous = _buildRequestFromLinks(_prev, _before, links, PaginationRequest.previous);
 
   static PaginationRequest? _buildRequestFromLinks(String linkKey, String queryKey, Map<String, String> links, PaginationRequest Function(int, String) build) {
-    if (!links.containsKey(linkKey)) {
-      return null;
-    }
+    if (!links.containsKey(linkKey)) return null;
 
     final String link = links[linkKey]!;
 
     try {
-      final params = Uri
-          .parse(link)
-          .queryParameters;
+      final params = Uri.parse(link).queryParameters;
 
       if (params.containsKey(queryKey) && params.containsKey(_limit)) {
         final limit = int.parse(params[_limit]!);
@@ -34,8 +28,10 @@ class PagedList<E> {
         return build(limit, params[queryKey]!);
       }
     } on FormatException {
-      print("Invalid URL: $link");
+      logger.severe("Invalid URL: $link");
     }
+
+    return null;
   }
 
   static const String _next = "next";

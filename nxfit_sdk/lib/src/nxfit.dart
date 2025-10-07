@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:logging/logging.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
+import '../core.dart';
 import 'api/interceptors/auth_interceptor.dart';
 import 'api/interceptors/cache_control_interceptor.dart';
 import 'api/protocols/badge_protocol.dart';
@@ -11,8 +12,6 @@ import 'api/protocols/session_protocol.dart';
 import 'api/protocols/session_sample_protocol.dart';
 import 'api/protocols/session_summary_protocol.dart';
 import 'api/protocols/source_protocol.dart';
-import 'auth/auth_provider.dart';
-import 'auth/auth_state.dart';
 import 'clients/badge_client.dart';
 import 'clients/implementation/badge_client_impl.dart';
 import 'clients/implementation/integration_client_impl.dart';
@@ -27,8 +26,7 @@ import 'clients/session_client.dart';
 import 'clients/session_sample_client.dart';
 import 'clients/session_summary_client.dart';
 import 'clients/source_client.dart';
-import 'config/configuration_provider.dart';
-import 'config/http_logger_level.dart';
+import 'logging/nxfit_logger.dart';
 
 part "nxfit_impl.dart";
 
@@ -49,6 +47,7 @@ part "nxfit_impl.dart";
 abstract class NxFit {
   /// A reference to the AuthProvider used when building the current instance.
   AuthProvider get authProvider;
+  ConfigurationProvider get configurationProvider;
 
   BadgeClient get badgeClient;
   IntegrationClient get integrationClient;

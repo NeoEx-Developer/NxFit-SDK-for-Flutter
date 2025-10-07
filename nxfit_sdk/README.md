@@ -20,7 +20,7 @@ In your project's `pubspec.yaml` file
 # pubspec.yaml
 
 dependencies:
-  nxfit_sdk: ^0.0.2
+  nxfit_sdk: ^0.1.0
 ```
 
 ## Getting started
@@ -31,9 +31,10 @@ The entry into the NxFit SDK is the [NxFit](nxfit/NxFit-class.html) class. It ca
 
 ```dart
   final configProvider = ConfigurationProvider(
-    "https://api.nxfit.io/",
-    httpLoggerLevel: HttpLoggerLevel.body,
-    connectTimeoutSeconds: 20,
+    "https://api.nxfit.io/", // Base URL
+    httpLoggerLevel: HttpLoggerLevel.body, // Log request and response bodies
+    minLogLevel: LogLevel.info, // Only log info, warnings, and errors
+    connectTimeoutSeconds: 20, // 20 second connection timeout
   );
   
   // AuthManager implements AuthProvider

@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:dio/dio.dart';
@@ -17,18 +16,14 @@ extension ReponseExtensions<T> on Response<T> {
 
     if (lastModified == null || lastModified.isEmpty) return null;
 
-    if (kDebugMode) {
-      print("Last-Modified: $lastModified  Count: ${headers["Last-Modified"]?.length}");
-    }
-
     return HttpDate.parse(lastModified);
   }
 
   String? getETag() {
-    final etag = this.headers.value("ETag");
+    final etag = headers.value("ETag");
 
     if (etag == null) return null;
 
-    return QuotedString.unquoteString(etag!);
+    return QuotedString.unquoteString(etag);
   }
 }

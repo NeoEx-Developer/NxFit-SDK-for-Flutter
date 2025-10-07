@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:meta/meta.dart';
 import 'package:nxfit_sdk/clients.dart';
 import 'package:nxfit_sdk/models.dart';
@@ -13,6 +12,7 @@ import '../../cache/entities/cached_query_entity.dart';
 import '../../cache/entities/integration_entity.dart';
 import '../../exceptions/not_modified_exception.dart';
 import '../../managers/integrations_manager.dart';
+import '../../logging/nxfit_logger.dart';
 
 @internal
 class IntegrationsManagerImpl implements IntegrationsManager {
@@ -28,7 +28,7 @@ class IntegrationsManagerImpl implements IntegrationsManager {
   static const cacheKey = "integrations";
   static const List<IntegrationModel> _allLocalIntegrations = [
     IntegrationModel(identifier: "apple", displayName: "Apple Health", logoUrl: "https://stnxfitcancshared.blob.core.windows.net/public/integrations/apple_health.png", isConnected: false, availability: IntegrationAvailability.unsupported, lastModifiedOn: null),
-    IntegrationModel(identifier: "health_connect", displayName: "Google Health Connect", logoUrl: "https://stnxfitcancshared.blob.core.windows.net/public/integrations/google_health_connect.png", isConnected: false, availability: IntegrationAvailability.unsupported, lastModifiedOn: null)
+    IntegrationModel(identifier: "health_connect", displayName: "Google Health Connect", logoUrl: "https://stnxfitcancshared.blob.core.windows.net/public/integrations/google_health_connect.png", isConnected: false, availability: IntegrationAvailability.unsupported, lastModifiedOn: null),
   ];
 
   IntegrationsManagerImpl._(this.baseRedirectUri, this._db, this._integrationClient, this._localIntegrationClient);
@@ -37,15 +37,7 @@ class IntegrationsManagerImpl implements IntegrationsManager {
     final _database = database ?? await CacheDatabase.build();
     final manager = IntegrationsManagerImpl._(baseRedirectUri, _database, client, localIntegrationClient);
 
-    Rx.combineLatest2(
-        _database.integrations.streamIntegrations(),
-        manager._localIntegrations,
-            (integrations, localIntegrations) => [
-              ...integrations.map((entity) => entity.toModel()).toList(),
-              ...localIntegrations
-            ]
-    )
-    .listen((integrations) {
+    Rx.combineLatest2(_database.integrations.streamIntegrations(), manager._localIntegrations, (integrations, localIntegrations) => [...integrations.map((entity) => entity.toModel()).toList(), ...localIntegrations]).listen((integrations) {
       integrations.sort((a, b) => a.displayName.compareTo(b.displayName));
 
       manager._integrations.value = integrations;
@@ -57,13 +49,12 @@ class IntegrationsManagerImpl implements IntegrationsManager {
       }
     });
 
-    Rx.combineLatest2(authProvider.authState, manager._localIntegrationClientReady, (authState, localIntegrationClientReady) => (authState, localIntegrationClientReady))
-      .listen((data) async {
-        final (authState, localIntegrationClientReady) = data;
+    Rx.combineLatest2(authProvider.authState, manager._localIntegrationClientReady, (authState, localIntegrationClientReady) => (authState, localIntegrationClientReady)).listen((data) async {
+      final (authState, localIntegrationClientReady) = data;
 
-        if (authState.isAuthenticated && localIntegrationClientReady) {
-          await manager._refreshLocalIntegrations();
-        }
+      if (authState.isAuthenticated && localIntegrationClientReady) {
+        await manager._refreshLocalIntegrations();
+      }
     });
 
     localIntegrationClient?.isReady.listen((state) {
@@ -119,7 +110,7 @@ class IntegrationsManagerImpl implements IntegrationsManager {
 
   @override
   Future<IntegrationConnectionCode> handleAuthorizeResponse(final String integration, final String connectionResultCode) async {
-    if (kDebugMode) print(">>>>>>>>>>>>>>> New Integration $integration $connectionResultCode");
+    logger.fine(">>>>>>>>>>>>>>> New Integration $integration $connectionResultCode");
 
     final connectionCode = (connectionResultCode == IntegrationConnectionCode.failure.name) ? IntegrationConnectionCode.failure : IntegrationConnectionCode.success;
 
@@ -168,46 +159,36 @@ class IntegrationsManagerImpl implements IntegrationsManager {
   Future<void> _refreshRemoteIntegrations() async {
     final cachedQuery = await _db.cachedQueries.get(cacheKey);
 
-    if (kDebugMode) {
-      print("CachedQuery: ${cachedQuery?.eTag} ${cachedQuery?.lastModifiedOn}");
-    }
+    if (cachedQuery != null) logger.fine("CachedQuery for key [$cacheKey]: ETag: ${cachedQuery.eTag} Last-Modified: ${cachedQuery.lastModifiedOn}");
 
     try {
       final integrations = await _integrationClient.listIntegrations(eTag: cachedQuery?.eTag, ifModifiedSince: cachedQuery?.lastModifiedOn?.toUtc());
 
-      if (kDebugMode) {
-        print("integrations: ${integrations?.eTag} ${integrations?.lastModifiedOn}");
-      }
+      logger.fine("Integrations: ${integrations.eTag} ${integrations.lastModifiedOn}");
 
       await _db.integrations.clear();
 
-      _db.integrations.addOrReplaceIntegrations(integrations.value.map((i) {
-        return IntegrationEntity(
-          identifier: i.identifier,
-          displayName: i.displayName,
-          logoUrl: i.logoUrl,
-          isConnected: i.isConnected,
-          lastModifiedOn: null,
-          eTag: null, // TODO; Add this properly
-        );
-      }).toList());
+      _db.integrations.addOrReplaceIntegrations(
+        integrations.value.map((i) {
+          return IntegrationEntity(
+            identifier: i.identifier,
+            displayName: i.displayName,
+            logoUrl: i.logoUrl,
+            isConnected: i.isConnected,
+            lastModifiedOn: null,
+            eTag: null, // TODO; Add this properly
+          );
+        }).toList(),
+      );
 
-      await _db.cachedQueries.addOrReplace(CachedQueryEntity(
-        key: cacheKey,
-        eTag: integrations.eTag,
-        lastModifiedOn: integrations.lastModifiedOn?.toUtc(),
-      ));
+      await _db.cachedQueries.addOrReplace(CachedQueryEntity(key: cacheKey, eTag: integrations.eTag, lastModifiedOn: integrations.lastModifiedOn?.toUtc()));
 
-      if (kDebugMode) {
-        final cachedQuery2 = await _db.cachedQueries.get(cacheKey);
-        print("Fetched integrations: ${integrations?.eTag} ${integrations?.lastModifiedOn}");
-        print("Original CachedQuery: ${cachedQuery?.eTag} ${cachedQuery?.lastModifiedOn?.toUtc()}");
-        print("Reloaded CachedQuery: ${cachedQuery2?.eTag} ${cachedQuery2?.lastModifiedOn?.toUtc()}");
-      }
+      final cachedQuery2 = await _db.cachedQueries.get(cacheKey);
+      logger.fine("Fetched integrations: [${integrations.eTag}] [${integrations.lastModifiedOn}]");
+      logger.fine("Original CachedQuery: [${cachedQuery?.eTag}] [${cachedQuery?.lastModifiedOn?.toUtc()}]");
+      logger.fine("Reloaded CachedQuery: [${cachedQuery2?.eTag}] [${cachedQuery2?.lastModifiedOn?.toUtc()}]");
     } on NotModifiedException catch (e) {
-      if (kDebugMode) {
-        print("Integrations - Not modified");
-      }
+      logger.info("Integrations - Not modified");
     }
   }
 

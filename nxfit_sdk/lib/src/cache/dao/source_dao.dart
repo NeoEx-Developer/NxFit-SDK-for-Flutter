@@ -1,5 +1,6 @@
 import 'package:froom/froom.dart';
 
+import '../../logging/nxfit_logger.dart';
 import '../entities/source_entity.dart';
 
 @dao
@@ -48,7 +49,7 @@ extension SourceDaoExtensions on SourceDao {
       updated += await updateSource(source);
     }
 
-    print("Sources updated: $updated");
+    logger.info("Sources updated: $updated");
   }
 
   @transaction

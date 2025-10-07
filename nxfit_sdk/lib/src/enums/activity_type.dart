@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import '../logging/nxfit_logger.dart';
 
 /// Indicates the type of activity for a particular session. The String [value] is used as a unique code by the NXFit API.
 enum ActivityType implements Comparable<ActivityType> {
@@ -96,7 +96,7 @@ enum ActivityType implements Comparable<ActivityType> {
     try {
       return values.singleWhere((v) => v.value == activityTypeValue);
     } on StateError {
-      if (kDebugMode) print("Unknown activity type: $activityTypeValue");
+      logger.severe("Unknown activity type: $activityTypeValue");
 
       return ActivityType.other;
     }
@@ -104,6 +104,6 @@ enum ActivityType implements Comparable<ActivityType> {
 
   @override
   int compareTo(ActivityType other) {
-    return other.index - index;
+    return index - other.index;
   }
 }

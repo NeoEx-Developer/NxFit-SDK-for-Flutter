@@ -1,3 +1,4 @@
+import '../enums/log_level.dart';
 import 'http_logger_level.dart';
 
 /// Defines the configuration requirements for the NxFit SDK. An implementation of this must be provided when building [NxFit].
@@ -24,6 +25,14 @@ class ConfigurationProvider {
   /// See also [HttpLoggerLevel].
   final HttpLoggerLevel httpLoggerLevel;
 
+  /// Specifies the minimum level of log messages that should be processed by the SDK native components (Android & iOS).
+  ///
+  /// The Dart/Flutter components use the [logging](https://pub.dev/packages/logging) package and that should be initialized by the
+  /// consuming app.
+  ///
+  /// This does not affect the [httpLoggerLevel] which is configured separately.
+  final LogLevel minLogLevel;
+
   /// Specifies the number of seconds to wait before timing out an HTTP request.
   ///
   /// Default: 60 seconds
@@ -32,6 +41,7 @@ class ConfigurationProvider {
   ConfigurationProvider(
     this.baseUrl, {
     this.httpLoggerLevel = HttpLoggerLevel.none,
+    this.minLogLevel = LogLevel.warn,
     this.connectTimeoutSeconds = 60,
   });
 }
