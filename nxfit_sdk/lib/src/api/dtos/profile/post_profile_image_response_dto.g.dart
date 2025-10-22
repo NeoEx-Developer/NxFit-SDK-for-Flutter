@@ -7,7 +7,5 @@ part of 'post_profile_image_response_dto.dart';
 // **************************************************************************
 
 PostProfileImageResponseDto _$PostProfileImageResponseDtoFromJson(
-        Map<String, dynamic> json) =>
-    PostProfileImageResponseDto(
-      imageUrl: json['imageUrl'] as String,
-    );
+  Map<String, dynamic> json,
+) => PostProfileImageResponseDto(imageUrl: json['imageUrl'] as String);

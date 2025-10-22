@@ -8,8 +8,9 @@ part of 'location_sample.dart';
 
 LocationSample _$LocationSampleFromJson(Map<String, dynamic> json) =>
     LocationSample(
-      timestamp: const OffsetDateTimeJsonConverter()
-          .fromJson(json['timestamp'] as String),
+      timestamp: const OffsetDateTimeJsonConverter().fromJson(
+        json['timestamp'] as String,
+      ),
       intervalInSeconds: (json['intervalInSeconds'] as num).toInt(),
       activeTimeInSeconds: (json['activeTimeInSeconds'] as num).toInt(),
       latitude: (json['latitude'] as num?)?.toDouble(),

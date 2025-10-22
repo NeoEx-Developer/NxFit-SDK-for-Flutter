@@ -1,21 +1,29 @@
 import 'package:logging/logging.dart';
 
 import '../../core.dart';
+import 'nxfit_logger.dart';
 
-/// Sets up a basic logger that logs to the console. The [minLogLevel] parameter specifies the minimum log level to log.
-/// Logs with a level lower than this will be ignored.
+/// Sets up a basic logger that prints log records to the console.
 ///
-/// This uses the [logging](https://pub.dev/packages/logging) package. It is recommended that
-/// the consuming application set up its own logging configuration if more advanced logging is required.
-void setBasicLogger(LogLevel minLogLevel) {
-  Logger.root.level = minLogLevel.toLevel();
+/// This function listens to the global `logger.onRecord` stream and prints
+/// each log record in a simple format:
+/// `LEVEL: TIMESTAMP: LOGGER_NAME: MESSAGE`
+///
+/// The global log level can be used to control the verbosity of the logs.
+/// The default log level is `LogLevel.info`. Example: `Logger.root.level`
+///
+/// After setting up the listener, it logs an "info" message to indicate
+/// that the basic logger has been successfully initialized.
+void setBasicLogger() {
+  logger.onRecord.listen((record) {
+     print('${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}');
+   });
 
-  Logger.root.onRecord.listen((record) {
-    print('${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}');
-  });
+  logger.info("Basic logger initialized");
 }
 
 extension on LogLevel {
+  /// Converts a [LogLevel] to a [Level] that can be used by the [Logger].
   Level toLevel() {
     switch (this) {
       case LogLevel.verbose:

@@ -7,12 +7,12 @@ part of 'get_sessions_response_dto.dart';
 // **************************************************************************
 
 GetSessionsResponseDto _$GetSessionsResponseDtoFromJson(
-        Map<String, dynamic> json) =>
-    GetSessionsResponseDto(
-      (json['results'] as List<dynamic>)
-          .map((e) => GetSessionResponseDto.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      (json['_links'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String),
-      ),
-    );
+  Map<String, dynamic> json,
+) => GetSessionsResponseDto(
+  (json['results'] as List<dynamic>)
+      .map((e) => GetSessionResponseDto.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  (json['_links'] as Map<String, dynamic>?)?.map(
+    (k, e) => MapEntry(k, e as String),
+  ),
+);

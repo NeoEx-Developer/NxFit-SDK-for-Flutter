@@ -8,8 +8,9 @@ part of 'distance_sample.dart';
 
 DistanceSample _$DistanceSampleFromJson(Map<String, dynamic> json) =>
     DistanceSample(
-      timestamp: const OffsetDateTimeJsonConverter()
-          .fromJson(json['timestamp'] as String),
+      timestamp: const OffsetDateTimeJsonConverter().fromJson(
+        json['timestamp'] as String,
+      ),
       intervalInSeconds: (json['intervalInSeconds'] as num).toInt(),
       activeTimeInSeconds: (json['activeTimeInSeconds'] as num).toInt(),
       meters: (json['meters'] as num).toDouble(),

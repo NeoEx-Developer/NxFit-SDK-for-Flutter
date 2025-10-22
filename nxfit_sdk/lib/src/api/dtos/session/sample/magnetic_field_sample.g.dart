@@ -8,8 +8,9 @@ part of 'magnetic_field_sample.dart';
 
 MagneticFieldSample _$MagneticFieldSampleFromJson(Map<String, dynamic> json) =>
     MagneticFieldSample(
-      timestamp: const OffsetDateTimeJsonConverter()
-          .fromJson(json['timestamp'] as String),
+      timestamp: const OffsetDateTimeJsonConverter().fromJson(
+        json['timestamp'] as String,
+      ),
       intervalInSeconds: (json['intervalInSeconds'] as num).toInt(),
       activeTimeInSeconds: (json['activeTimeInSeconds'] as num).toInt(),
       x: (json['x'] as num).toDouble(),

@@ -67,7 +67,6 @@ class _$IntegrationModelCWProxyImpl implements _$IntegrationModelCWProxy {
       call(lastModifiedOn: lastModifiedOn);
 
   @override
-
   /// Creates a new instance with the provided field values.
   /// Passing `null` to a nullable field nullifies it, while `null` for a non-nullable field is ignored. To update a single field use `IntegrationModel(...).copyWith.fieldName(value)`.
   ///
@@ -86,28 +85,28 @@ class _$IntegrationModelCWProxyImpl implements _$IntegrationModelCWProxy {
     return IntegrationModel(
       identifier:
           identifier == const $CopyWithPlaceholder() || identifier == null
-              ? _value.identifier
-              // ignore: cast_nullable_to_non_nullable
-              : identifier as String,
+          ? _value.identifier
+          // ignore: cast_nullable_to_non_nullable
+          : identifier as String,
       displayName:
           displayName == const $CopyWithPlaceholder() || displayName == null
-              ? _value.displayName
-              // ignore: cast_nullable_to_non_nullable
-              : displayName as String,
+          ? _value.displayName
+          // ignore: cast_nullable_to_non_nullable
+          : displayName as String,
       logoUrl: logoUrl == const $CopyWithPlaceholder() || logoUrl == null
           ? _value.logoUrl
           // ignore: cast_nullable_to_non_nullable
           : logoUrl as String,
       isConnected:
           isConnected == const $CopyWithPlaceholder() || isConnected == null
-              ? _value.isConnected
-              // ignore: cast_nullable_to_non_nullable
-              : isConnected as bool,
+          ? _value.isConnected
+          // ignore: cast_nullable_to_non_nullable
+          : isConnected as bool,
       availability:
           availability == const $CopyWithPlaceholder() || availability == null
-              ? _value.availability
-              // ignore: cast_nullable_to_non_nullable
-              : availability as IntegrationAvailability,
+          ? _value.availability
+          // ignore: cast_nullable_to_non_nullable
+          : availability as IntegrationAvailability,
       lastModifiedOn: lastModifiedOn == const $CopyWithPlaceholder()
           ? _value.lastModifiedOn
           // ignore: cast_nullable_to_non_nullable

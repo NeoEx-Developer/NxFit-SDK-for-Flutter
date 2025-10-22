@@ -1,5 +1,9 @@
 # NxFit SDK for Flutter - Changelog
 
+## 0.2.0
+ 
+* **Breaking Change**: Removed the `minLogLevel` parameter from `setBasicLogger`, as the log level is now configured directly on the logger itself.
+
 ## 0.1.0
 
 * Refactored logging system with new `minLogLevel` configuration option.

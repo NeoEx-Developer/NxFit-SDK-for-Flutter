@@ -102,11 +102,11 @@ class _SourceProtocol implements SourceProtocol {
     final _data = patchDoc.map((e) => e.toJson()).toList();
     final _options = _setStreamType<HttpResponse<void>>(
       Options(
-        method: 'PATCH',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json-patch+json',
-      )
+            method: 'PATCH',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'application/json-patch+json',
+          )
           .compose(
             _dio.options,
             'user/sources/${id}',
@@ -135,11 +135,11 @@ class _SourceProtocol implements SourceProtocol {
     _data.addAll(source.toJson());
     final _options = _setStreamType<HttpResponse<void>>(
       Options(
-        method: 'PUT',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json; charset=UTF-8',
-      )
+            method: 'PUT',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'application/json; charset=UTF-8',
+          )
           .compose(
             _dio.options,
             'user/sources/${id}',
@@ -166,11 +166,11 @@ class _SourceProtocol implements SourceProtocol {
     final _data = priorities.map((e) => e.toJson()).toList();
     final _options = _setStreamType<HttpResponse<void>>(
       Options(
-        method: 'PUT',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json; charset=UTF-8',
-      )
+            method: 'PUT',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'application/json; charset=UTF-8',
+          )
           .compose(
             _dio.options,
             'user/sources/priorities',

@@ -7,7 +7,7 @@ part of 'put_user_integration_response_dto.dart';
 // **************************************************************************
 
 PutUserIntegrationResponseDto _$PutUserIntegrationResponseDtoFromJson(
-        Map<String, dynamic> json) =>
-    PutUserIntegrationResponseDto(
-      authorizeUrl: json['authorizeUrl'] as String?,
-    );
+  Map<String, dynamic> json,
+) => PutUserIntegrationResponseDto(
+  authorizeUrl: json['authorizeUrl'] as String?,
+);

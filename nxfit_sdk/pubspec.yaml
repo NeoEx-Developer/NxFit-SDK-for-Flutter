@@ -1,12 +1,9 @@
 name: nxfit_sdk
-version: 0.1.0
+version: 0.2.0
 homepage: https://www.neoex.io/
 repository: https://github.com/NeoEx-Developer/NxFit-SDK-for-Flutter
 description: >
-  The NxFit SDK for Flutter provides access to the NxFit REST API to retrieve user health data from the server. The SDK provides *clients*,
-  which contain convenience methods to make HTTP calls to the NxFit API. Models for all the NxFit entities are also provided. To further
-  assist in adoption of the SDK, *managers* and * repositories* are also provided that use caching. The NxFit SDK requires the consuming
-  app to provide a user ID and an access token via the [AuthProvider] interface.
+  The NxFit SDK for Flutter provides access to the NxFit REST API to retrieve user health data from the server.
 
 environment:
   sdk: '>=3.8.0 <4.0.0'

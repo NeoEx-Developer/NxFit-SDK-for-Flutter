@@ -35,17 +35,17 @@ class _ProfileProtocol implements ProfileProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<GetPersonalProfileResponseDto>>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'user',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(
-            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-          ),
-    );
+          Options(method: 'GET', headers: _headers, extra: _extra)
+              .compose(
+                _dio.options,
+                'user',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late GetPersonalProfileResponseDto _value;
     try {
@@ -105,11 +105,11 @@ class _ProfileProtocol implements ProfileProtocol {
     _data.addAll(dto.toJson());
     final _options = _setStreamType<HttpResponse<void>>(
       Options(
-        method: 'PUT',
-        headers: _headers,
-        extra: _extra,
-        contentType: 'application/json',
-      )
+            method: 'PUT',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'application/json',
+          )
           .compose(
             _dio.options,
             'user',
@@ -181,17 +181,17 @@ class _ProfileProtocol implements ProfileProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<GetProfileSettingsResponseDto>>(
-      Options(method: 'GET', headers: _headers, extra: _extra)
-          .compose(
-            _dio.options,
-            'user/settings',
-            queryParameters: queryParameters,
-            data: _data,
-          )
-          .copyWith(
-            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-          ),
-    );
+          Options(method: 'GET', headers: _headers, extra: _extra)
+              .compose(
+                _dio.options,
+                'user/settings',
+                queryParameters: queryParameters,
+                data: _data,
+              )
+              .copyWith(
+                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+              ),
+        );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late GetProfileSettingsResponseDto _value;
     try {
