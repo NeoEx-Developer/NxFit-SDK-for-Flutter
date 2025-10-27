@@ -17,7 +17,7 @@ GetUserSessionResponseDto _$GetUserSessionResponseDtoFromJson(
   ),
   const OffsetDateTimeJsonConverter().fromJson(json['endedOnLocal'] as String),
   (json['distanceInMeters'] as num?)?.toDouble(),
-  (json['energyBurnedInCalories'] as num?)?.toInt(),
+  (json['energyBurnedInKilocalories'] as num?)?.toInt(),
   (json['maximalOxygenConsumption'] as num?)?.toDouble(),
   UserDetails.fromJson(json['user'] as Map<String, dynamic>),
   SourceDetails.fromJson(json['source'] as Map<String, dynamic>),

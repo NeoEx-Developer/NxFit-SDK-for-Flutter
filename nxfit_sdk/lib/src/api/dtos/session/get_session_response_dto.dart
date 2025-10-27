@@ -17,7 +17,7 @@ class GetSessionResponseDto {
   final OffsetDateTime startedOnLocal;
   final OffsetDateTime endedOnLocal;
   final double? distanceInMeters;
-  final int? energyBurnedInCalories;
+  final int? energyBurnedInKilocalories;
   final double? maximalOxygenConsumption;
 
   final UserDetails user;
@@ -44,7 +44,7 @@ class GetSessionResponseDto {
     this.startedOnLocal,
     this.endedOnLocal,
     this.distanceInMeters,
-    this.energyBurnedInCalories,
+    this.energyBurnedInKilocalories,
     this.maximalOxygenConsumption,
     this.user,
     this.cadenceMetrics,

@@ -14,13 +14,13 @@ class ActiveEnergyBurnedSample {
   final OffsetDateTime timestamp;
   final int intervalInSeconds;
   final int activeTimeInSeconds;
-  final double calories;
+  final double kilocalories;
 
   const ActiveEnergyBurnedSample({
     required this.timestamp,
     required this.intervalInSeconds,
     required this.activeTimeInSeconds,
-    required this.calories,
+    required this.kilocalories,
   });
 
   factory ActiveEnergyBurnedSample.fromJson(Map<String, dynamic> json) => _$ActiveEnergyBurnedSampleFromJson(json);

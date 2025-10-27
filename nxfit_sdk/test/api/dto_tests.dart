@@ -56,7 +56,7 @@ void dtoTests() {
       const avgBPM = 133.33;
       const maxBPM = 155;
       const minBPM = 100;
-      const energyBurnedInCalories = 323;
+      const energyBurnedInKilocalories = 323;
       const activeTimeInSeconds = 444;
       const activeTimeGoalInSeconds = 500;
 
@@ -65,7 +65,7 @@ void dtoTests() {
         "avgBPM": avgBPM,
         "maxBPM": maxBPM,
         "minBPM": minBPM,
-        "energyBurnedInCalories": energyBurnedInCalories,
+        "energyBurnedInKilocalories": energyBurnedInKilocalories,
         "activeTimeInSeconds": activeTimeInSeconds,
         "activeTimeGoalInSeconds": activeTimeGoalInSeconds
       };
@@ -76,7 +76,7 @@ void dtoTests() {
       expect(avgBPM, dto.avgBPM);
       expect(maxBPM, dto.maxBPM);
       expect(minBPM, dto.minBPM);
-      expect(energyBurnedInCalories, dto.energyBurnedInCalories);
+      expect(energyBurnedInKilocalories, dto.energyBurnedInKilocalories);
       expect(activeTimeInSeconds, dto.activeTimeInSeconds);
       expect(activeTimeGoalInSeconds, dto.activeTimeGoalInSeconds);
     });

@@ -52,7 +52,7 @@ extension GetSessionMetricsResponseDtoExtensions on GetSessionMetricsResponseDto
         avgBPM: this.avgBPM,
         maxBPM: this.maxBPM,
         minBPM: this.minBPM,
-        energyBurnedInCalories: this.energyBurnedInCalories,
+        energyBurnedInKilocalories: this.energyBurnedInKilocalories,
         activeTimeInSeconds: this.activeTimeInSeconds,
         activeTimeGoalInSeconds: this.activeTimeGoalInSeconds
     );

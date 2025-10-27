@@ -8,7 +8,7 @@ class SessionModel {
   final int id;
   final ActivityType activityType;
   final Duration activeDuration;
-  final int? energyBurnedInCalories;
+  final int? energyBurnedInKilocalories;
   final double? maximalOxygenConsumption;
   final OffsetDateTime startedOnLocal;
   final OffsetDateTime endedOnLocal;
@@ -30,7 +30,7 @@ class SessionModel {
     required this.createdOn,
     required this.updatedOn,
     required this.user,
-    this.energyBurnedInCalories,
+    this.energyBurnedInKilocalories,
     this.maximalOxygenConsumption,
     this.heartRateMetrics,
     this.speedMetrics,

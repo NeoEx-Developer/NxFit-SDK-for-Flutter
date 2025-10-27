@@ -25,7 +25,7 @@ class UserSessionModel extends SessionModel {
     required super.updatedOn,
     required super.user,
     required this.source,
-    super.energyBurnedInCalories,
+    super.energyBurnedInKilocalories,
     super.maximalOxygenConsumption,
     this.sourceDevice,
     this.sourceApp,

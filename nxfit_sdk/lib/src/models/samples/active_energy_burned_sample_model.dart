@@ -6,12 +6,12 @@ class ActiveEnergyBurnedSampleModel {
   final OffsetDateTime timestamp;
   final int intervalInSeconds;
   final Duration activeTime;
-  final double calories;
+  final double kilocalories;
 
   const ActiveEnergyBurnedSampleModel({
     required this.timestamp,
     required this.intervalInSeconds,
     required this.activeTime,
-    required this.calories,
+    required this.kilocalories,
   });
 }

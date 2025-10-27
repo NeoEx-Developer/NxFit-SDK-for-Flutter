@@ -12,7 +12,7 @@ class GetSessionMetricsResponseDto {
   final double avgBPM;
   final int maxBPM;
   final int minBPM;
-  final int energyBurnedInCalories;
+  final int energyBurnedInKilocalories;
   final int activeTimeInSeconds;
   final int activeTimeGoalInSeconds;
 
@@ -21,7 +21,7 @@ class GetSessionMetricsResponseDto {
       this.avgBPM,
       this.maxBPM,
       this.minBPM,
-      this.energyBurnedInCalories,
+      this.energyBurnedInKilocalories,
       this.activeTimeInSeconds,
       this.activeTimeGoalInSeconds
   );

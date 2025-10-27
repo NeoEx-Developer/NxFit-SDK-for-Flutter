@@ -214,7 +214,7 @@ extension _ActiveEnergyBurnedSampleExtensions on ActiveEnergyBurnedSample {
         timestamp: timestamp,
         intervalInSeconds: intervalInSeconds,
         activeTime: Duration(seconds: activeTimeInSeconds),
-        calories: calories,
+        kilocalories: kilocalories,
       );
 }
 
@@ -224,7 +224,7 @@ extension _BasalEnergyBurnedSampleExtensions on BasalEnergyBurnedSample {
         timestamp: timestamp,
         intervalInSeconds: intervalInSeconds,
         activeTime: Duration(seconds: activeTimeInSeconds),
-        calories: calories,
+        kilocalories: kilocalories,
       );
 }
 

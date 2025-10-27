@@ -14,5 +14,5 @@ BasalEnergyBurnedSample _$BasalEnergyBurnedSampleFromJson(
   ),
   intervalInSeconds: (json['intervalInSeconds'] as num).toInt(),
   activeTimeInSeconds: (json['activeTimeInSeconds'] as num).toInt(),
-  calories: (json['calories'] as num).toDouble(),
+  kilocalories: (json['kilocalories'] as num).toDouble(),
 );

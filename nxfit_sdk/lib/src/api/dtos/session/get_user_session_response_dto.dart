@@ -17,7 +17,7 @@ class GetUserSessionResponseDto {
   final OffsetDateTime startedOnLocal;
   final OffsetDateTime endedOnLocal;
   final double? distanceInMeters;
-  final int? energyBurnedInCalories;
+  final int? energyBurnedInKilocalories;
   final double? maximalOxygenConsumption;
 
   final UserDetails user;
@@ -41,7 +41,7 @@ class GetUserSessionResponseDto {
   @JsonKey(name: '_metadata')
   final Metadata metadata;
 
-  const GetUserSessionResponseDto(this.id, this.activityType, this.activeDurationInSeconds, this.startedOnLocal, this.endedOnLocal, this.distanceInMeters, this.energyBurnedInCalories, this.maximalOxygenConsumption, this.user, this.source, this.cadenceMetrics, this.heartRateMetrics, this.powerMetrics, this.speedMetrics,
+  const GetUserSessionResponseDto(this.id, this.activityType, this.activeDurationInSeconds, this.startedOnLocal, this.endedOnLocal, this.distanceInMeters, this.energyBurnedInKilocalories, this.maximalOxygenConsumption, this.user, this.source, this.cadenceMetrics, this.heartRateMetrics, this.powerMetrics, this.speedMetrics,
       this.syncDetails, this.metadata);
 
   factory GetUserSessionResponseDto.fromJson(Map<String, dynamic> json) => _$GetUserSessionResponseDtoFromJson(json);
