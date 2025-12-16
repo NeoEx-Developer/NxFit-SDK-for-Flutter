@@ -1,5 +1,13 @@
 # NxFit SDK for Flutter - Changelog
 
+## 0.3.1
+
+* Fixed issue where the `IntegrationsManager` was not always emitting the list of `integrations`.
+
+## 0.3.0
+
+* **Breaking Change**: Renamed all properties that contained energy values to be in Kilocalories instead of Calories.  
+
 ## 0.2.0
  
 * **Breaking Change**: Removed the `minLogLevel` parameter from `setBasicLogger`, as the log level is now configured directly on the logger itself.

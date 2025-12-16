@@ -1,5 +1,9 @@
 # NxFit SDK for Flutter - Changelog
 
+## 0.3.1
+
+* Fixed issue where the `IntegrationsManager` was not always emitting the list of `integrations`.
+
 ## 0.3.0
 
 * **Breaking Change**: Renamed all properties that contained energy values to be in Kilocalories instead of Calories.  

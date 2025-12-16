@@ -22,8 +22,8 @@ class IntegrationsManagerImpl implements IntegrationsManager {
   final CacheDatabase _db;
   final _connectionEvents = StreamController<ConnectionEvent>();
   final _disconnectionEvents = StreamController<DisconnectionEvent>();
-  final _integrations = BehaviorSubject<List<IntegrationModel>>();
-  final _localIntegrations = BehaviorSubject<List<IntegrationModel>>();
+  final _integrations = BehaviorSubject<List<IntegrationModel>>.seeded([]);
+  final _localIntegrations = BehaviorSubject<List<IntegrationModel>>.seeded([]);
   final _localIntegrationClientReady = BehaviorSubject<bool>.seeded(false);
   static const cacheKey = "integrations";
   static const List<IntegrationModel> _allLocalIntegrations = [

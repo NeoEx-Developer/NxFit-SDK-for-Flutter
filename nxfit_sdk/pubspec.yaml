@@ -1,5 +1,5 @@
 name: nxfit_sdk
-version: 0.3.0
+version: 0.3.1
 homepage: https://www.neoex.io/
 repository: https://github.com/NeoEx-Developer/NxFit-SDK-for-Flutter
 description: >
@@ -43,6 +43,3 @@ dev_dependencies:
   build_runner: '>=2.3.0 <4.0.0'
   json_serializable: ^6.8.0
   copy_with_extension_gen: ^9.1.1
-
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
