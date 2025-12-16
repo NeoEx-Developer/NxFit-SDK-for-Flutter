@@ -6,37 +6,39 @@ import 'session_model.dart';
 
 @immutable
 class UserSessionModel extends SessionModel {
-  final String sourceIntegration;
-  final String? sourceDevice;
-  final String? sourceApp;
-  final String? syncId;
-  final String? syncVersion;
   final SourceDetails source;
-  final Metadata metadata;
+  final SyncDetails? syncDetails;
+
+  @override
+  final ExtendedMetadata metadata;
 
   const UserSessionModel(
     super.id, {
     required super.activityType,
     required super.activeDuration,
-    required this.sourceIntegration,
     required super.startedOnLocal,
     required super.endedOnLocal,
-    required super.createdOn,
-    required super.updatedOn,
     required super.user,
     required this.source,
+    required this.metadata,
     super.energyBurnedInKilocalories,
     super.maximalOxygenConsumption,
-    this.sourceDevice,
-    this.sourceApp,
-    this.syncId,
-    this.syncVersion,
+    this.syncDetails,
     super.heartRateMetrics,
     super.speedMetrics,
     super.cadenceMetrics,
     super.powerMetrics,
-    required this.metadata,
-  });
+    super.floorsClimbedMetrics,
+    super.respiratoryRateMetrics
+  }) : super(metadata: metadata);
+}
+
+@immutable
+class SyncDetails {
+  final String externalId;
+  final OffsetDateTime? completedOn;
+
+  const SyncDetails(this.externalId, this.completedOn);
 }
 
 @immutable
@@ -49,9 +51,13 @@ class SourceDetails {
 }
 
 @immutable
-class Metadata {
-  final OffsetDateTime? completedOn;
-  final SessionPrivacy privacy;
+class ExtendedMetadata extends Metadata {
+  final OffsetDateTime? processedOn;
 
-  const Metadata({ this.completedOn, required this.privacy });
+  const ExtendedMetadata(
+      super.createdOn,
+      super.updatedOn,
+      super.privacy, {
+        this.processedOn
+    });
 }

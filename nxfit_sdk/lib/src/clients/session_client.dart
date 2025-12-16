@@ -76,10 +76,7 @@ abstract class SessionClient {
     required ActivityType activityType,
     required OffsetDateTime startedOnLocal,
     required OffsetDateTime endedOnLocal,
-    OffsetDateTime? completedOn,
     required int activeDurationInSeconds,
-    String? syncId,
-    String? syncVersion,
     required SessionPrivacy privacy,
   });
 }

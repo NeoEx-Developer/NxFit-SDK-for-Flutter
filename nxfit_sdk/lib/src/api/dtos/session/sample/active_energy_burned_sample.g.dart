@@ -7,12 +7,11 @@ part of 'active_energy_burned_sample.dart';
 // **************************************************************************
 
 ActiveEnergyBurnedSample _$ActiveEnergyBurnedSampleFromJson(
-  Map<String, dynamic> json,
-) => ActiveEnergyBurnedSample(
-  timestamp: const OffsetDateTimeJsonConverter().fromJson(
-    json['timestamp'] as String,
-  ),
-  intervalInSeconds: (json['intervalInSeconds'] as num).toInt(),
-  activeTimeInSeconds: (json['activeTimeInSeconds'] as num).toInt(),
-  kilocalories: (json['kilocalories'] as num).toDouble(),
-);
+        Map<String, dynamic> json) =>
+    ActiveEnergyBurnedSample(
+      timestamp: const OffsetDateTimeJsonConverter()
+          .fromJson(json['timestamp'] as String),
+      intervalInSeconds: (json['intervalInSeconds'] as num).toInt(),
+      activeTimeInSeconds: (json['activeTimeInSeconds'] as num).toInt(),
+      kilocalories: (json['kilocalories'] as num).toDouble(),
+    );

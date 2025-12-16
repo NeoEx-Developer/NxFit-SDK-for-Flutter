@@ -25,11 +25,17 @@ class GetSessionResponseDto {
   @JsonKey(name: 'cadence')
   final CadenceMetrics? cadenceMetrics;
 
+  @JsonKey(name: 'floorsClimbed')
+  final FloorsClimbedMetrics? floorsClimbedMetrics;
+
   @JsonKey(name: 'heartRate')
   final HeartRateMetrics? heartRateMetrics;
 
   @JsonKey(name: 'power')
   final PowerMetrics? powerMetrics;
+
+  @JsonKey(name: 'respiratoryRate')
+  final RespiratoryRateMetrics? respiratoryRateMetrics;
 
   @JsonKey(name: 'speed')
   final SpeedMetrics? speedMetrics;
@@ -48,8 +54,10 @@ class GetSessionResponseDto {
     this.maximalOxygenConsumption,
     this.user,
     this.cadenceMetrics,
+    this.floorsClimbedMetrics,
     this.heartRateMetrics,
     this.powerMetrics,
+    this.respiratoryRateMetrics,
     this.speedMetrics,
     this.metadata
   );
@@ -81,8 +89,8 @@ class UserDetails {
 @OffsetDateTimeJsonConverter()
 class CadenceMetrics {
   final double avgCadencePerMinute;
-  final int maxCadencePerMinute;
-  final int minCadencePerMinute;
+  final double maxCadencePerMinute;
+  final double minCadencePerMinute;
   final String? cadenceUnitShort;
   final String? cadenceUnitFull;
 
@@ -95,6 +103,20 @@ class CadenceMetrics {
   );
 
   factory CadenceMetrics.fromJson(Map<String, dynamic> json) => _$CadenceMetricsFromJson(json);
+}
+
+@internal
+@immutable
+@JsonSerializable(createToJson: false)
+@OffsetDateTimeJsonConverter()
+class FloorsClimbedMetrics {
+  final double avgFloorsClimbed;
+  final double maxFloorsClimbed;
+  final double minFloorsClimbed;
+
+  const FloorsClimbedMetrics(this.avgFloorsClimbed, this.maxFloorsClimbed, this.minFloorsClimbed);
+
+  factory FloorsClimbedMetrics.fromJson(Map<String, dynamic> json) => _$FloorsClimbedMetricsFromJson(json);
 }
 
 @internal
@@ -121,8 +143,8 @@ class HeartRateMetrics {
 @OffsetDateTimeJsonConverter()
 class PowerMetrics {
   final double avgPowerInWatts;
-  final int maxPowerInWatts;
-  final int minPowerInWatts;
+  final double maxPowerInWatts;
+  final double minPowerInWatts;
 
   const PowerMetrics(this.avgPowerInWatts,
       this.maxPowerInWatts,
@@ -130,6 +152,24 @@ class PowerMetrics {
   );
 
   factory PowerMetrics.fromJson(Map<String, dynamic> json) => _$PowerMetricsFromJson(json);
+}
+
+@internal
+@immutable
+@JsonSerializable(createToJson: false)
+@OffsetDateTimeJsonConverter()
+class RespiratoryRateMetrics {
+  final double avgRespiratoryRateInBreathsPerMinute;
+  final double maxRespiratoryRateInBreathsPerMinute;
+  final double minRespiratoryRateInBreathsPerMinute;
+
+  const RespiratoryRateMetrics(
+      this.avgRespiratoryRateInBreathsPerMinute,
+      this.maxRespiratoryRateInBreathsPerMinute,
+      this.minRespiratoryRateInBreathsPerMinute
+      );
+
+  factory RespiratoryRateMetrics.fromJson(Map<String, dynamic> json) => _$RespiratoryRateMetricsFromJson(json);
 }
 
 @internal
@@ -157,10 +197,12 @@ class SpeedMetrics {
 class Metadata {
   final OffsetDateTime createdOn;
   final OffsetDateTime updatedOn;
+  final String privacy;
 
   const Metadata(
     this.createdOn,
-    this.updatedOn
+    this.updatedOn,
+    this.privacy
   );
 
   factory Metadata.fromJson(Map<String, dynamic> json) => _$MetadataFromJson(json);

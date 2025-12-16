@@ -1,4 +1,5 @@
 import 'package:meta/meta.dart';
+import 'package:nxfit_sdk/models.dart';
 import 'package:time_machine/time_machine.dart';
 
 import '../enums/activity_type.dart';
@@ -12,14 +13,16 @@ class SessionModel {
   final double? maximalOxygenConsumption;
   final OffsetDateTime startedOnLocal;
   final OffsetDateTime endedOnLocal;
-  final OffsetDateTime createdOn;
-  final OffsetDateTime updatedOn;
 
   final UserDetails user;
   final HeartRateMetrics? heartRateMetrics;
   final SpeedMetrics? speedMetrics;
   final CadenceMetrics? cadenceMetrics;
   final PowerMetrics? powerMetrics;
+  final FloorsClimbedMetrics? floorsClimbedMetrics;
+  final RespiratoryRateMetrics? respiratoryRateMetrics;
+
+  final Metadata metadata;
 
   const SessionModel(
     this.id, {
@@ -27,15 +30,16 @@ class SessionModel {
     required this.activeDuration,
     required this.startedOnLocal,
     required this.endedOnLocal,
-    required this.createdOn,
-    required this.updatedOn,
     required this.user,
+    required this.metadata,
     this.energyBurnedInKilocalories,
     this.maximalOxygenConsumption,
     this.heartRateMetrics,
     this.speedMetrics,
     this.cadenceMetrics,
     this.powerMetrics,
+    this.floorsClimbedMetrics,
+    this.respiratoryRateMetrics
   });
 }
 
@@ -69,8 +73,8 @@ class SpeedMetrics {
 @immutable
 class CadenceMetrics {
   final double avgCadencePerMinute;
-  final int maxCadencePerMinute;
-  final int minCadencePerMinute;
+  final double maxCadencePerMinute;
+  final double minCadencePerMinute;
   final String? cadenceUnitShort;
   final String? cadenceUnitFull;
 
@@ -84,10 +88,41 @@ class CadenceMetrics {
 }
 
 @immutable
+class FloorsClimbedMetrics {
+  final double avgFloorsClimbed;
+  final double maxFloorsClimbed;
+  final double minFloorsClimbed;
+
+  const FloorsClimbedMetrics(this.avgFloorsClimbed, this.maxFloorsClimbed, this.minFloorsClimbed);
+}
+
+@immutable
+class RespiratoryRateMetrics {
+  final double avgRespiratoryRateInBreathsPerMinute;
+  final double maxRespiratoryRateInBreathsPerMinute;
+  final double minRespiratoryRateInBreathsPerMinute;
+
+  const RespiratoryRateMetrics(
+      this.avgRespiratoryRateInBreathsPerMinute,
+      this.maxRespiratoryRateInBreathsPerMinute,
+      this.minRespiratoryRateInBreathsPerMinute
+    );
+}
+
+@immutable
 class PowerMetrics {
   final double avgPowerInWatts;
-  final int maxPowerInWatts;
-  final int minPowerInWatts;
+  final double maxPowerInWatts;
+  final double minPowerInWatts;
 
   const PowerMetrics(this.avgPowerInWatts, this.maxPowerInWatts, this.minPowerInWatts);
+}
+
+@immutable
+class Metadata {
+  final OffsetDateTime createdOn;
+  final OffsetDateTime updatedOn;
+  final SessionPrivacy privacy;
+
+  const Metadata(this.createdOn, this.updatedOn, this.privacy);
 }

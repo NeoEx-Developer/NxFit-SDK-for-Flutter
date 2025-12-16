@@ -101,10 +101,7 @@ class SessionClientImpl extends SessionClient with ApiCaller {
     required ActivityType activityType,
     required OffsetDateTime startedOnLocal,
     required OffsetDateTime endedOnLocal,
-    OffsetDateTime? completedOn,
     required int activeDurationInSeconds,
-    String? syncId,
-    String? syncVersion,
     required SessionPrivacy privacy,
   }) async {
     await apiCall(() async {
@@ -115,10 +112,7 @@ class SessionClientImpl extends SessionClient with ApiCaller {
             activityType: activityType.value,
             startedOnLocal: startedOnLocal,
             endedOnLocal: endedOnLocal,
-            completedOn: completedOn,
             activeDurationInSeconds: activeDurationInSeconds,
-            syncId: syncId,
-            syncVersion: syncVersion,
             privacy: privacy.name,
           ));
     });
@@ -133,22 +127,23 @@ extension GetUserSessionResponseDtoExtensions on GetUserSessionResponse.GetUserS
         activeDuration: Duration(seconds: activeDurationInSeconds),
         energyBurnedInKilocalories: energyBurnedInKilocalories,
         maximalOxygenConsumption: maximalOxygenConsumption,
-        sourceIntegration: source.integration,
-        sourceDevice: source.device,
-        sourceApp: source.app,
-        syncId: syncDetails?.id,
-        syncVersion: syncDetails?.version,
         startedOnLocal: startedOnLocal,
         endedOnLocal: endedOnLocal,
-        createdOn: metadata.createdOn,
-        updatedOn: metadata.updatedOn,
         user: UserDetails(user.id, user.name, user.imageUrl),
         source: SourceDetails(source.integration, source.device, source.app),
+        syncDetails: syncDetails != null ? SyncDetails(syncDetails!.externalId, syncDetails!.completedOn) : null,
         heartRateMetrics: heartRateMetrics != null ? HeartRateMetrics(heartRateMetrics!.avgBPM, heartRateMetrics!.maxBPM, heartRateMetrics!.minBPM) : null,
         speedMetrics: speedMetrics != null ? SpeedMetrics(speedMetrics!.avgSpeedInMetersPerSecond, speedMetrics!.maxSpeedInMetersPerSecond, speedMetrics!.minSpeedInMetersPerSecond) : null,
         cadenceMetrics: cadenceMetrics != null ? CadenceMetrics(cadenceMetrics!.avgCadencePerMinute, cadenceMetrics!.maxCadencePerMinute, cadenceMetrics!.minCadencePerMinute, cadenceMetrics!.cadenceUnitShort, cadenceMetrics!.cadenceUnitFull) : null,
         powerMetrics: powerMetrics != null ? PowerMetrics(powerMetrics!.avgPowerInWatts, powerMetrics!.maxPowerInWatts, powerMetrics!.minPowerInWatts) : null,
-        metadata: Metadata(completedOn: metadata.completedOn, privacy: SessionPrivacy.of(metadata.privacy)));
+        floorsClimbedMetrics: floorsClimbedMetrics != null ? FloorsClimbedMetrics(floorsClimbedMetrics!.avgFloorsClimbed, floorsClimbedMetrics!.maxFloorsClimbed, floorsClimbedMetrics!.minFloorsClimbed) : null,
+        respiratoryRateMetrics: respiratoryRateMetrics != null ?
+          RespiratoryRateMetrics(
+              respiratoryRateMetrics!.avgRespiratoryRateInBreathsPerMinute,
+              respiratoryRateMetrics!.maxRespiratoryRateInBreathsPerMinute,
+              respiratoryRateMetrics!.minRespiratoryRateInBreathsPerMinute
+          ) : null,
+        metadata: ExtendedMetadata(metadata.createdOn, metadata.updatedOn, SessionPrivacy.of(metadata.privacy), processedOn: metadata.processedOn));
   }
 }
 
@@ -169,13 +164,19 @@ extension GetSessionResponseDtoExtensions on GetSessionResponse.GetSessionRespon
         maximalOxygenConsumption: maximalOxygenConsumption,
         startedOnLocal: startedOnLocal,
         endedOnLocal: endedOnLocal,
-        createdOn: metadata.createdOn,
-        updatedOn: metadata.updatedOn,
         user: UserDetails(user.id, user.name, user.imageUrl),
         heartRateMetrics: heartRateMetrics != null ? HeartRateMetrics(heartRateMetrics!.avgBPM, heartRateMetrics!.maxBPM, heartRateMetrics!.minBPM) : null,
         speedMetrics: speedMetrics != null ? SpeedMetrics(speedMetrics!.avgSpeedInMetersPerSecond, speedMetrics!.maxSpeedInMetersPerSecond, speedMetrics!.minSpeedInMetersPerSecond) : null,
         cadenceMetrics: cadenceMetrics != null ? CadenceMetrics(cadenceMetrics!.avgCadencePerMinute, cadenceMetrics!.maxCadencePerMinute, cadenceMetrics!.minCadencePerMinute, cadenceMetrics!.cadenceUnitShort, cadenceMetrics!.cadenceUnitFull) : null,
-        powerMetrics: powerMetrics != null ? PowerMetrics(powerMetrics!.avgPowerInWatts, powerMetrics!.maxPowerInWatts, powerMetrics!.minPowerInWatts) : null);
+        powerMetrics: powerMetrics != null ? PowerMetrics(powerMetrics!.avgPowerInWatts, powerMetrics!.maxPowerInWatts, powerMetrics!.minPowerInWatts) : null,
+        floorsClimbedMetrics: floorsClimbedMetrics != null ? FloorsClimbedMetrics(floorsClimbedMetrics!.avgFloorsClimbed, floorsClimbedMetrics!.maxFloorsClimbed, floorsClimbedMetrics!.minFloorsClimbed) : null,
+        respiratoryRateMetrics: respiratoryRateMetrics != null ?
+        RespiratoryRateMetrics(
+            respiratoryRateMetrics!.avgRespiratoryRateInBreathsPerMinute,
+            respiratoryRateMetrics!.maxRespiratoryRateInBreathsPerMinute,
+            respiratoryRateMetrics!.minRespiratoryRateInBreathsPerMinute
+        ) : null,
+        metadata: Metadata(metadata.createdOn, metadata.updatedOn, SessionPrivacy.of(metadata.privacy)));
   }
 }
 

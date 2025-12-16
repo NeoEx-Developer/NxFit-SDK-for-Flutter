@@ -1,5 +1,9 @@
 # NxFit SDK for Flutter - Changelog
 
+## 0.4.0
+
+* Updated `SessionModel` and `UserSessionModel` to match updated API description.
+
 ## 0.3.1
 
 * Fixed issue where the `IntegrationsManager` was not always emitting the list of `integrations`.

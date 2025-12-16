@@ -21,7 +21,7 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<HeartRateSummarySample>>>
-  listHeartRateSummarySamplesByInterval(
+      listHeartRateSummarySamplesByInterval(
     int userId,
     int id, {
     int? intervalInSeconds = null,
@@ -35,21 +35,19 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     final _headers = <String, dynamic>{r'if-modified-since': ifModifiedSince};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<
-          HttpResponse<ListSampleRequestDto<HeartRateSummarySample>>
-        >(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/heartrate/interval',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+    final _options = _setStreamType<
+        HttpResponse<ListSampleRequestDto<HeartRateSummarySample>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/heartrate/interval',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<HeartRateSummarySample> _value;
     try {
@@ -66,7 +64,7 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<AccelerationSample>>>
-  listAccelerationSamples(
+      listAccelerationSamples(
     int userId,
     int id, {
     DateTime? ifModifiedSince,
@@ -79,17 +77,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<AccelerationSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/acceleration',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/acceleration',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<AccelerationSample> _value;
     try {
@@ -104,7 +102,7 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<ActiveEnergyBurnedSample>>>
-  listActiveEnergyBurnedSamples(
+      listActiveEnergyBurnedSamples(
     int userId,
     int id, {
     DateTime? ifModifiedSince,
@@ -115,21 +113,19 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     final _headers = <String, dynamic>{r'if-modified-since': ifModifiedSince};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<
-          HttpResponse<ListSampleRequestDto<ActiveEnergyBurnedSample>>
-        >(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/active-energy-burned',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+    final _options = _setStreamType<
+        HttpResponse<ListSampleRequestDto<ActiveEnergyBurnedSample>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/active-energy-burned',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<ActiveEnergyBurnedSample> _value;
     try {
@@ -146,7 +142,7 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<BasalEnergyBurnedSample>>>
-  listBasalEnergyBurnedSamples(
+      listBasalEnergyBurnedSamples(
     int userId,
     int id, {
     DateTime? ifModifiedSince,
@@ -157,21 +153,19 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     final _headers = <String, dynamic>{r'if-modified-since': ifModifiedSince};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<
-          HttpResponse<ListSampleRequestDto<BasalEnergyBurnedSample>>
-        >(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/basal-energy-burned',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+    final _options = _setStreamType<
+        HttpResponse<ListSampleRequestDto<BasalEnergyBurnedSample>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/basal-energy-burned',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<BasalEnergyBurnedSample> _value;
     try {
@@ -200,17 +194,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<CadenceSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/cadence',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/cadence',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<CadenceSample> _value;
     try {
@@ -225,7 +219,8 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<DistanceSample>>>
-  listDistanceSamples(int userId, int id, {DateTime? ifModifiedSince}) async {
+      listDistanceSamples(int userId, int id,
+          {DateTime? ifModifiedSince}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -234,17 +229,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<DistanceSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/distance',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/distance',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<DistanceSample> _value;
     try {
@@ -259,7 +254,7 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<ExerciseTimeSample>>>
-  listExerciseTimeSamples(
+      listExerciseTimeSamples(
     int userId,
     int id, {
     DateTime? ifModifiedSince,
@@ -272,17 +267,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<ExerciseTimeSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/exercise-time',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/exercise-time',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<ExerciseTimeSample> _value;
     try {
@@ -309,17 +304,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<GyroSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/gyro',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/gyro',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<GyroSample> _value;
     try {
@@ -334,7 +329,8 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<HeartRateSample>>>
-  listHeartRateSamples(int userId, int id, {DateTime? ifModifiedSince}) async {
+      listHeartRateSamples(int userId, int id,
+          {DateTime? ifModifiedSince}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -343,17 +339,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<HeartRateSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/heartrate',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/heartrate',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<HeartRateSample> _value;
     try {
@@ -368,7 +364,7 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<HeartRateVariabilitySample>>>
-  listHeartRateVariabilitySamples(
+      listHeartRateVariabilitySamples(
     int userId,
     int id, {
     DateTime? ifModifiedSince,
@@ -379,21 +375,19 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     final _headers = <String, dynamic>{r'if-modified-since': ifModifiedSince};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<
-          HttpResponse<ListSampleRequestDto<HeartRateVariabilitySample>>
-        >(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/heartrate-variability',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+    final _options = _setStreamType<
+        HttpResponse<ListSampleRequestDto<HeartRateVariabilitySample>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/heartrate-variability',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<HeartRateVariabilitySample> _value;
     try {
@@ -410,7 +404,7 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<MagneticFieldSample>>>
-  listMagneticFieldSamplesAsync(
+      listMagneticFieldSamplesAsync(
     int userId,
     int id, {
     DateTime? ifModifiedSince,
@@ -423,17 +417,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<MagneticFieldSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/magnetic-field',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/magnetic-field',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<MagneticFieldSample> _value;
     try {
@@ -462,17 +456,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<PowerSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/power',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/power',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<PowerSample> _value;
     try {
@@ -487,7 +481,7 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<OxygenSaturationSample>>>
-  listOxygenSaturationSamples(
+      listOxygenSaturationSamples(
     int userId,
     int id, {
     DateTime? ifModifiedSince,
@@ -498,21 +492,19 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     final _headers = <String, dynamic>{r'if-modified-since': ifModifiedSince};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<
-          HttpResponse<ListSampleRequestDto<OxygenSaturationSample>>
-        >(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/oxygen-saturation',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+    final _options = _setStreamType<
+        HttpResponse<ListSampleRequestDto<OxygenSaturationSample>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/oxygen-saturation',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<OxygenSaturationSample> _value;
     try {
@@ -529,7 +521,7 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<RestingHeartRateSample>>>
-  listRestingHeartRateSamples(
+      listRestingHeartRateSamples(
     int userId,
     int id, {
     DateTime? ifModifiedSince,
@@ -540,21 +532,19 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     final _headers = <String, dynamic>{r'if-modified-since': ifModifiedSince};
     _headers.removeWhere((k, v) => v == null);
     const Map<String, dynamic>? _data = null;
-    final _options =
-        _setStreamType<
-          HttpResponse<ListSampleRequestDto<RestingHeartRateSample>>
-        >(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/resting-heartrate',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+    final _options = _setStreamType<
+        HttpResponse<ListSampleRequestDto<RestingHeartRateSample>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/resting-heartrate',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<RestingHeartRateSample> _value;
     try {
@@ -571,7 +561,8 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
 
   @override
   Future<HttpResponse<ListSampleRequestDto<LocationSample>>>
-  listLocationSamples(int userId, int id, {DateTime? ifModifiedSince}) async {
+      listLocationSamples(int userId, int id,
+          {DateTime? ifModifiedSince}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
@@ -580,17 +571,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<LocationSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/location',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/location',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<LocationSample> _value;
     try {
@@ -617,17 +608,17 @@ class _SessionSampleProtocol implements SessionSampleProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<ListSampleRequestDto<StepSample>>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                'users/${userId}/sessions/${id}/samples/steps',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'users/${userId}/sessions/${id}/samples/steps',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late ListSampleRequestDto<StepSample> _value;
     try {

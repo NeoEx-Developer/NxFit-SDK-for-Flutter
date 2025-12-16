@@ -14,20 +14,14 @@ class PutSessionRequestDto {
   final String activityType;
   final OffsetDateTime startedOnLocal;
   final OffsetDateTime endedOnLocal;
-  final OffsetDateTime? completedOn;
   final int activeDurationInSeconds;
-  final String? syncId;
-  final String? syncVersion;
   final String privacy;
 
   const PutSessionRequestDto({
     required this.activityType,
     required this.startedOnLocal,
     required this.endedOnLocal,
-    this.completedOn,
     required this.activeDurationInSeconds,
-    this.syncId,
-    this.syncVersion,
     required this.privacy
   });
 

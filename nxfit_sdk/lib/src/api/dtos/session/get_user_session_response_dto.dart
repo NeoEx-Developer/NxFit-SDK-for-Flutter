@@ -23,8 +23,14 @@ class GetUserSessionResponseDto {
   final UserDetails user;
   final SourceDetails source;
 
+  @JsonKey(name: 'sync')
+  final SyncDetails? syncDetails;
+
   @JsonKey(name: 'cadence')
   final CadenceMetrics? cadenceMetrics;
+
+  @JsonKey(name: 'floorsClimbed')
+  final FloorsClimbedMetrics? floorsClimbedMetrics;
 
   @JsonKey(name: 'heartRate')
   final HeartRateMetrics? heartRateMetrics;
@@ -32,17 +38,34 @@ class GetUserSessionResponseDto {
   @JsonKey(name: 'power')
   final PowerMetrics? powerMetrics;
 
+  @JsonKey(name: 'respiratoryRate')
+  final RespiratoryRateMetrics? respiratoryRateMetrics;
+
   @JsonKey(name: 'speed')
   final SpeedMetrics? speedMetrics;
-
-  @JsonKey(name: 'sync')
-  final SyncDetails? syncDetails;
 
   @JsonKey(name: '_metadata')
   final Metadata metadata;
 
-  const GetUserSessionResponseDto(this.id, this.activityType, this.activeDurationInSeconds, this.startedOnLocal, this.endedOnLocal, this.distanceInMeters, this.energyBurnedInKilocalories, this.maximalOxygenConsumption, this.user, this.source, this.cadenceMetrics, this.heartRateMetrics, this.powerMetrics, this.speedMetrics,
-      this.syncDetails, this.metadata);
+  const GetUserSessionResponseDto(
+      this.id,
+      this.activityType,
+      this.activeDurationInSeconds,
+      this.startedOnLocal,
+      this.endedOnLocal,
+      this.distanceInMeters,
+      this.energyBurnedInKilocalories,
+      this.maximalOxygenConsumption,
+      this.user,
+      this.source,
+      this.syncDetails,
+      this.cadenceMetrics,
+      this.floorsClimbedMetrics,
+      this.heartRateMetrics,
+      this.powerMetrics,
+      this.respiratoryRateMetrics,
+      this.speedMetrics,
+      this.metadata);
 
   factory GetUserSessionResponseDto.fromJson(Map<String, dynamic> json) => _$GetUserSessionResponseDtoFromJson(json);
 }
@@ -85,8 +108,8 @@ class SourceDetails {
 @OffsetDateTimeJsonConverter()
 class CadenceMetrics {
   final double avgCadencePerMinute;
-  final int maxCadencePerMinute;
-  final int minCadencePerMinute;
+  final double maxCadencePerMinute;
+  final double minCadencePerMinute;
   final String? cadenceUnitShort;
   final String? cadenceUnitFull;
 
@@ -113,14 +136,46 @@ class HeartRateMetrics {
 @immutable
 @JsonSerializable(createToJson: false)
 @OffsetDateTimeJsonConverter()
+class FloorsClimbedMetrics {
+  final double avgFloorsClimbed;
+  final double maxFloorsClimbed;
+  final double minFloorsClimbed;
+
+  const FloorsClimbedMetrics(this.avgFloorsClimbed, this.maxFloorsClimbed, this.minFloorsClimbed);
+
+  factory FloorsClimbedMetrics.fromJson(Map<String, dynamic> json) => _$FloorsClimbedMetricsFromJson(json);
+}
+
+@internal
+@immutable
+@JsonSerializable(createToJson: false)
+@OffsetDateTimeJsonConverter()
 class PowerMetrics {
   final double avgPowerInWatts;
-  final int maxPowerInWatts;
-  final int minPowerInWatts;
+  final double maxPowerInWatts;
+  final double minPowerInWatts;
 
   const PowerMetrics(this.avgPowerInWatts, this.maxPowerInWatts, this.minPowerInWatts);
 
   factory PowerMetrics.fromJson(Map<String, dynamic> json) => _$PowerMetricsFromJson(json);
+}
+
+@internal
+@immutable
+@JsonSerializable(createToJson: false)
+@OffsetDateTimeJsonConverter()
+class RespiratoryRateMetrics {
+  final double avgRespiratoryRateInBreathsPerMinute;
+  final double maxRespiratoryRateInBreathsPerMinute;
+  final double minRespiratoryRateInBreathsPerMinute;
+
+  const RespiratoryRateMetrics(
+      this.avgRespiratoryRateInBreathsPerMinute,
+      this.maxRespiratoryRateInBreathsPerMinute,
+      this.minRespiratoryRateInBreathsPerMinute
+    );
+
+  factory RespiratoryRateMetrics.fromJson(Map<String, dynamic> json) => _$RespiratoryRateMetricsFromJson(json);
 }
 
 @internal
@@ -142,10 +197,10 @@ class SpeedMetrics {
 @JsonSerializable(createToJson: false)
 @OffsetDateTimeJsonConverter()
 class SyncDetails {
-  final String? id;
-  final String? version;
+  final String externalId;
+  final OffsetDateTime? completedOn;
 
-  const SyncDetails(this.id, this.version);
+  const SyncDetails(this.externalId, this.completedOn);
 
   factory SyncDetails.fromJson(Map<String, dynamic> json) => _$SyncDetailsFromJson(json);
 }
@@ -157,13 +212,13 @@ class SyncDetails {
 class Metadata {
   final OffsetDateTime createdOn;
   final OffsetDateTime updatedOn;
-  final OffsetDateTime? completedOn;
+  final OffsetDateTime? processedOn;
   final String privacy;
 
   const Metadata(
     this.createdOn,
     this.updatedOn, {
-    this.completedOn,
+    this.processedOn,
     this.privacy = "Public", //If this value is not set in the response then the privacy is 'Public'.
   });
 

@@ -75,17 +75,17 @@ class _SessionSummaryProtocol implements SessionSummaryProtocol {
     const Map<String, dynamic>? _data = null;
     final _options =
         _setStreamType<HttpResponse<GetHeartRateZoneSummariesResponseDto>>(
-          Options(method: 'GET', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                '/users/${userId}/sessions/heartrate-zones',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/users/${userId}/sessions/heartrate-zones',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(
+            baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
+          ),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
     late GetHeartRateZoneSummariesResponseDto _value;
     try {

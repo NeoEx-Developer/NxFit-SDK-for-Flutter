@@ -27,8 +27,6 @@ class CreateSessionRequestDto {
   final OffsetDateTime? startedOnLocal;
   final OffsetDateTime? endedOnLocal;
   final int activeDurationInSeconds;
-  final String? syncId;
-  final String? syncVersion;
 
   const CreateSessionRequestDto(
     this.externalId,
@@ -46,9 +44,7 @@ class CreateSessionRequestDto {
     this.syncDeviceAppVersion,
     this.startedOnLocal,
     this.endedOnLocal,
-    this.activeDurationInSeconds,
-    this.syncId,
-    this.syncVersion,
+    this.activeDurationInSeconds
   );
 
   Map<String, dynamic> toJson() => _$CreateSessionRequestDtoToJson(this);
